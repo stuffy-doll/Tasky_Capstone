@@ -14,9 +14,9 @@ class Project(db.Model):
 
   def to_dict(self):
     return {
-      'id': self.id,
-      'user_id': self.user_id,
-      'name': self.name,
+      "id": self.id,
+      "user_id": self.user_id,
+      "name": self.name,
     }
 
 
@@ -34,10 +34,10 @@ class Section(db.Model):
 
   def to_dict(self):
     return {
-      'id': self.id,
-      'user_id': self.user_id,
-      'project_id': self.project_id,
-      'name': self.name
+      "id": self.id,
+      "user_id": self.user_id,
+      "project_id": self.project_id,
+      "name": self.name
     }
 
 
@@ -57,6 +57,17 @@ class Task(db.Model):
   project = db.relationship('Project', back_populates='tasks')
   section = db.relationship('Section', back_populates='tasks')
 
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "project_id": self.project_id,
+      "section_id": self.section_id,
+      "title": self.title,
+      "description": self.description,
+      "due_date": self.due_date,
+      "is_complete": self.is_complete
+    }
 
 class Comment(db.Model):
   __tablename__ = 'comments'
@@ -68,3 +79,11 @@ class Comment(db.Model):
 
   user = db.relationship('User', back_populates='comments')
   project = db.relationship('Project', back_populates='comments')
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "project_id": self.project_id,
+      "content": self.content
+    }
