@@ -4,7 +4,7 @@ class Project(db.Model):
   __tablename__ = 'projects'
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   name = db.Column(db.String(50), nullable=False)
 
   user = db.relationship('User', back_populates='projects')
@@ -24,13 +24,13 @@ class Section(db.Model):
   __tablename__ = 'sections'
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, primary_key=True)
-  project_id = db.Column(db.Integer, nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
   name = db.Column(db.String(50), nullable=False)
 
   user = db.relationship('User', back_populates='sections')
   project = db.relationship('Project', back_populates='sections')
-  tasks = db.relationship('Task', back_populates='sections', cascade='all, delete')
+  tasks = db.relationship('Task', back_populates='section', cascade='all, delete')
 
   def to_dict(self):
     return {
@@ -45,13 +45,13 @@ class Task(db.Model):
   __tablename__ = 'tasks'
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, nullable=False)
-  project_id = db.Column(db.Integer, nullable=False)
-  section_id = db.Column(db.Integer, nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+  section_id = db.Column(db.Integer, db.ForeignKey('sections.id'), nullable=False)
   title = db.Column(db.String(50), nullable=False)
   description = db.Column(db.Text)
   due_date = db.Column(db.Date)
-  is_complete = db.Column(db.Boolean)
+  is_complete = db.Column(db.Boolean, default=False)
 
   user = db.relationship('User', back_populates='tasks')
   project = db.relationship('Project', back_populates='tasks')
@@ -73,8 +73,8 @@ class Comment(db.Model):
   __tablename__ = 'comments'
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, nullable=False)
-  project_id = db.Column(db.Integer, nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
   content = db.Column(db.Text)
 
   user = db.relationship('User', back_populates='comments')
