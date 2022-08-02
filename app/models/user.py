@@ -10,6 +10,12 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    profile_pic = db.Column(db.String(255))
+
+    projects = db.relationship('Project', back_populates='user', cascade='all, delete')
+    sections = db.relationship('Section', back_populates='user', cascade='all, delete')
+    tasks = db.relationship('Task', back_populates='user', cascade='all, delete')
+    comments = db.relationship('Comment', back_populates='user', cascade='all, delete')
 
     @property
     def password(self):
