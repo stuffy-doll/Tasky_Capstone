@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSections } from "../../store/sections";
+import TaskList from "./Tasks";
 
 const Section = ({ userId, projects }) => {
   const projectId = +useParams().projectId;
@@ -19,6 +20,7 @@ const Section = ({ userId, projects }) => {
       {sections.map(section => (
         <div className="section-card" key={section.id}>
           {section.name}
+          <TaskList sectionId={section.id} />
         </div>
       ))}
     </div>
