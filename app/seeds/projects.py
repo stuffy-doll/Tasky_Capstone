@@ -24,8 +24,17 @@ def seed_sections():
     user_id=1, project_id=1, name='Demo Section'
   )
 
+  demo_s_z = Section(
+    user_id=1, project_id=2, name='Demo Section'
+  )
+
+  demo_s_s = Section(
+    user_id=1, project_id=2, name='Demo Section'
+  )
+
   db.session.add(demo_s_x)
   db.session.add(demo_s_y)
+  db.session.add(demo_s_z)
 
   db.session.commit()
 
@@ -38,8 +47,13 @@ def seed_tasks():
     user_id=1, project_id=1, section_id=2, title='Demo Task', description='This is a demo task.'
   )
 
+  demo_t_sz = Task(
+    user_id=1, project_id=2, section_id=3, title='Demo Task', description='This is a demo task.'
+  )
+
   db.session.add(demo_t_sx)
   db.session.add(demo_t_sy)
+  db.session.add(demo_t_sz)
 
   db.session.commit()
 
