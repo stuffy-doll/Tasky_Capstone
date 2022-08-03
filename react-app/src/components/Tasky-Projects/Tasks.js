@@ -6,7 +6,7 @@ const TaskList = ({ sectionId }) => {
   const dispatch = useDispatch();
 
   const tasks = useSelector(state => Object.values(state.tasks))
-    .filter(task => task.id === sectionId)
+    .filter(task => task?.section_id === sectionId)
 
   useEffect(() => {
     dispatch(getTasks(sectionId));

@@ -1,6 +1,6 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_login import login_required
-from app.models import Project, Section, Task, Comment
+from app.models import db, Project, Section, Task, Comment
 
 project_routes = Blueprint('projects', __name__)
 
@@ -21,3 +21,22 @@ def get_tasks(section_id):
   query = Task.query.filter_by(section_id=section_id).all()
   tasks = [task.to_dict() for task in query]
   return { "tasks": tasks }
+
+@project_routes.route('/new', methods=['POST'])
+def post_task():
+  data = request.json
+  print("DATA:: ", data)
+  if data:
+    task = Task(
+      user_id=data['user_id'],
+      project_id=data['project_id'],
+      section_id=data['section_id'],
+      title=data['title'],
+      description=data['description'],
+      due_date=data['due_date'],
+      is_complete=False
+    )
+    db.session.add(task);
+    db.session.commit();
+    print("TASK:: ", task.to_dict())
+    return task.to_dict();
