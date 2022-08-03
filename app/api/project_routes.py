@@ -8,5 +8,11 @@ project_routes = Blueprint('projects', __name__)
 def get_projects(user_id):
   query = Project.query.filter_by(user_id=user_id).all()
   projects = [project.to_dict() for project in query]
-  print({ "projects": projects })
   return { "projects": projects }
+
+@project_routes.route('sections/<project_id>')
+def get_sections(project_id):
+  query = Section.query.filter_by(project_id=project_id).all()
+  sections = [section.to_dict() for section in query]
+  print("SECTIONS:: ", sections);
+  return { "sections": sections }

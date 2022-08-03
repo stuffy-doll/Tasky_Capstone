@@ -1,6 +1,6 @@
 const GET_PROJECTS = 'get/getProjects';
 
-const get = (payload) => ({
+const getP = (payload) => ({
   type: GET_PROJECTS,
   payload
 });
@@ -9,8 +9,7 @@ export const getProjects = (userId) => async dispatch => {
   const res = await fetch(`/api/projects/${userId}`);
   if (res.ok) {
     const data = await res.json();
-    dispatch(get(data));
-    console.log("DATA:: ", data)
+    dispatch(getP(data));
     return data;
   } else {
     return {
