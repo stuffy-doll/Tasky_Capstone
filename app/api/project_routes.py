@@ -14,5 +14,10 @@ def get_projects(user_id):
 def get_sections(project_id):
   query = Section.query.filter_by(project_id=project_id).all()
   sections = [section.to_dict() for section in query]
-  print("SECTIONS:: ", sections);
   return { "sections": sections }
+
+@project_routes.route('tasks/<section_id>')
+def get_tasks(section_id):
+  query = Task.query.filter_by(section_id=section_id).all()
+  tasks = [task.to_dict() for task in query]
+  return { "tasks": tasks }
