@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSections } from "../../store/sections";
+import TaskForm from "../Forms/TaskForm";
 import TaskList from "./Tasks";
 
 const Section = ({ userId, projects }) => {
@@ -18,9 +19,12 @@ const Section = ({ userId, projects }) => {
   return (
     <div className="section">
       {sections.map(section => (
-        <div className="section-card" key={section.id}>
-          {section.name}
-          <TaskList sectionId={section.id} />
+        <div key={section.id}>
+          <div className="section-card">
+            {section.name}
+            <TaskList sectionId={section.id} />
+          </div>
+          <TaskForm sectionId={section.id} />
         </div>
       ))}
     </div>
