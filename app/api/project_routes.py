@@ -10,22 +10,21 @@ def get_projects(user_id):
   projects = [project.to_dict() for project in query]
   return { "projects": projects }
 
-@project_routes.route('sections/<project_id>')
+@project_routes.route('/sections/<project_id>')
 def get_sections(project_id):
   query = Section.query.filter_by(project_id=project_id).all()
   sections = [section.to_dict() for section in query]
   return { "sections": sections }
 
-@project_routes.route('tasks/<section_id>')
+@project_routes.route('/tasks/<section_id>')
 def get_tasks(section_id):
   query = Task.query.filter_by(section_id=section_id).all()
   tasks = [task.to_dict() for task in query]
   return { "tasks": tasks }
 
-@project_routes.route('/new', methods=['POST'])
+@project_routes.route('/tasks/new', methods=['POST'])
 def post_task():
   data = request.json
-  print("DATA:: ", data)
   if data:
     task = Task(
       user_id=data['user_id'],
@@ -36,7 +35,21 @@ def post_task():
       due_date=data['due_date'],
       is_complete=False
     )
-    db.session.add(task);
-    db.session.commit();
-    print("TASK:: ", task.to_dict())
-    return task.to_dict();
+    db.session.add(task)
+    db.session.commit()
+    return task.to_dict()
+
+@project_routes.route('/sections/new', methods=['POST'])
+def post_section():
+  data = request.json
+  print("DATA:: ", data)
+  if data:
+    section = Section(
+      user_id=data['user_id'],
+      project_id=data['project_id'],
+      name=data['secName']
+    )
+    db.session.add(section)
+    db.session.commit()
+    print(section.to_dict())
+    return section.to_dict()

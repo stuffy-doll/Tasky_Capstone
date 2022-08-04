@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSections } from "../../store/sections";
+import SectionForm from "../Forms/SectionForm";
 import TaskForm from "../Forms/TaskForm";
 import TaskList from "./Tasks";
 
@@ -27,6 +28,7 @@ const Section = ({ userId, projects }) => {
           <TaskForm sectionId={section.id} />
         </div>
       ))}
+      <SectionForm projectId={projectId} />
     </div>
   )
 };
