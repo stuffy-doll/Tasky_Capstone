@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Project
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+
+from app.models.projects import Project
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -68,6 +70,15 @@ def sign_up():
             password=form.data['password']
         )
         db.session.add(user)
+        db.session.commit()
+        user_default = Project(
+            user_id=user.id,
+            name='Your Tasks',
+            color_label='Default Coal',
+            is_favorite=False,
+            is_default=True
+        )
+        db.session.add(user_default)
         db.session.commit()
         login_user(user)
         return user.to_dict()

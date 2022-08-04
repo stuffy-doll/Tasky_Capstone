@@ -11,6 +11,8 @@ const ProjectList = () => {
   const userId = useSelector(state => state.session.user.id);
   const projects = useSelector(state => Object.values(state.projects));
 
+  const favorites = projects.filter(project => project.is_favorite);
+
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -24,6 +26,18 @@ const ProjectList = () => {
           <p>New Project</p>
           <button onClick={() => setShowModal(true)}>+</button>
         </div>
+        {favorites.length > 0 && (
+          <div className='project-favorites'>
+            <h3 className='projects-header'>Favorites</h3>
+            {favorites.map((favorite, idx) => (
+              <div className='project-card' key={idx}>
+                <div className={`color-label-${favorite.color_label}`} />
+                <Link className='project-link' to={`/projects/${favorite.id}`}>{favorite.name}</Link>
+              </div>
+            ))}
+          </div>
+        )}
+        <h3 className='projects-header'>Your Projects</h3>
         {projects.map(project => (
           <div className='project-card' key={project.id}>
             <Link className='project-link' to={`/projects/${project.id}`}>{project.name}</Link>
