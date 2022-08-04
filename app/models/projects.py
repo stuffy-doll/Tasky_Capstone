@@ -1,4 +1,5 @@
 from .db import db
+from datetime import date, timedelta
 
 class Project(db.Model):
   __tablename__ = 'projects'
@@ -6,6 +7,9 @@ class Project(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   name = db.Column(db.String(50), nullable=False)
+  color_label = db.Column(db.String, nullable=False)
+  is_favorite = db.Column(db.Boolean, default=False)
+  is_default = db.Column(db.Boolean, default=False)
 
   user = db.relationship('User', back_populates='projects')
   sections = db.relationship('Section', back_populates='project', cascade='all, delete')
@@ -17,6 +21,8 @@ class Project(db.Model):
       "id": self.id,
       "user_id": self.user_id,
       "name": self.name,
+      "color_label": self.color_label,
+      "is_favorite": self.is_favorite
     }
 
 
@@ -50,7 +56,7 @@ class Task(db.Model):
   section_id = db.Column(db.Integer, db.ForeignKey('sections.id'), nullable=False)
   title = db.Column(db.String(50), nullable=False)
   description = db.Column(db.Text)
-  due_date = db.Column(db.Date)
+  due_date = db.Column(db.Date, default=(date.today() + timedelta(days=7)))
   is_complete = db.Column(db.Boolean, default=False)
 
   user = db.relationship('User', back_populates='tasks')

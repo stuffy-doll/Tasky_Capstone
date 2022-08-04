@@ -3,11 +3,11 @@ from datetime import date
 
 def seed_projects():
   demo_x = Project(
-    user_id=1, name='Demo Project'
+    user_id=1, name='Demo Project', color_label='Brick Brown', is_favorite=False, is_default=True
   )
 
   demo_y = Project(
-    user_id=1, name='Demo Project 2'
+    user_id=1, name='Demo Project 2', color_label='Baby Peach', is_favorite=True, is_default=False
   )
 
   db.session.add(demo_x)
@@ -40,7 +40,7 @@ def seed_sections():
 
 def seed_tasks():
   demo_t_sx = Task(
-    user_id=1, project_id=1, section_id=1, title='Demo Task', description='This is a demo task.', due_date=date.fromisoformat('2022-08-02')
+    user_id=1, project_id=1, section_id=1, title='Demo Task', description='This is a demo task.', due_date=date.fromisoformat('2022-08-14')
   )
 
   demo_t_sy = Task(
