@@ -25,7 +25,7 @@ export const getTasks = (sectionId) => async dispatch => {
 };
 
 export const postTask = (payload) => async dispatch => {
-  const res = await fetch(`/api/projects/new`, {
+  const res = await fetch(`/api/projects/tasks/new`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)

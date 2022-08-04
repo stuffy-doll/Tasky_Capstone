@@ -39,7 +39,7 @@ const TaskForm = ({ sectionId }) => {
         title,
         description,
         due_date: dueDate === undefined ? null : dueDate
-      }
+      };
       const res = await dispatch(postTask(payload))
       if (res) {
         console.log(res)
