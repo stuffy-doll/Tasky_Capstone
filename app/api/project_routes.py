@@ -61,6 +61,27 @@ def complete_task():
   db.session.commit()
   return task.to_dict()
 
+@project_routes.route('/tasks/incomplete', methods=['PUT'])
+def incomplete_task():
+  data = request.json
+  task = Task.query.get(data['task_id'])
+  task.is_complete = False
+  db.session.commit()
+  return task.to_dict()
+
+@project_routes.route('/tasks/<task_id>/update', methods=['PUT'])
+def update_task(task_id):
+  print(task_id)
+  data = request.json
+  task = Task.query.get(task_id)
+  if data:
+    task.title = data['title']
+    task.description = data['description']
+    db.session.commit()
+    return task.to_dict();
+
+
+
 @project_routes.route('/sections/new', methods=['POST'])
 def post_section():
   data = request.json

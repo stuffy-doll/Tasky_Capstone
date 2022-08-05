@@ -43,7 +43,6 @@ const ProjectList = () => {
         {projects.map(project => (
           <div className='project-card' key={project.id}>
             <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />
-            {console.log(project.color_label)}
             <Link className='project-link' to={`/projects/${project.id}`}>{project.name}</Link>
           </div>
         ))}
