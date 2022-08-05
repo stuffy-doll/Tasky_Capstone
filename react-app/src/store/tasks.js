@@ -1,6 +1,7 @@
 const GET_TASKS = 'get/getTasks';
 const POST_TASK = 'post/postTask';
-const UPDATE_TASK = 'update/updateTask'
+const UPDATE_TASK = 'update/updateTask';
+const DELETE_TASK = 'delete/deleteTask';
 
 const getT = (payload) => ({
   type: GET_TASKS,
@@ -16,6 +17,11 @@ const putT = (payload) => ({
   type: UPDATE_TASK,
   payload
 });
+
+const deleteT = (payload) => ({
+  type: DELETE_TASK,
+  payload
+})
 
 export const getTasks = (sectionId) => async dispatch => {
   const res = await fetch(`/api/projects/tasks/${sectionId}`);
@@ -64,6 +70,22 @@ export const updateTask = (payload) => async dispatch => {
   };
 };
 
+export const deleteTask = (taskId) => async dispatch => {
+  const res = await fetch(`/api/projects/tasks/${taskId}/delete`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(deleteT(data));
+    return data;
+  } else {
+    return {
+      "Message": "Unsuccessful"
+    };
+  };
+};
+
 const taskReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
@@ -75,6 +97,9 @@ const taskReducer = (state = {}, action) => {
       return newState
     case UPDATE_TASK:
       newState[action.payload.id] = action.payload;
+      return newState
+    case DELETE_TASK:
+      delete newState[action.payload.id]
       return newState
     default:
       return state
