@@ -32,6 +32,7 @@ const SectionForm = ({ projectId }) => {
       if (res) {
         setValErrors([]);
         setName("");
+        setShowForm(false);
         setSubmitted(false);
       };
     };

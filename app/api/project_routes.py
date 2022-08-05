@@ -22,6 +22,20 @@ def get_tasks(section_id):
   tasks = [task.to_dict() for task in query]
   return { "tasks": tasks }
 
+@project_routes.route('/new', methods=['POST'])
+def post_project():
+  data = request.json
+  if data:
+    project = Project(
+      user_id=data['user_id'],
+      name=data['projName'],
+      color_label=data['colorLabel'],
+      is_favorite=data['favorited']
+    )
+    db.session.add(project)
+    db.session.commit()
+    return project.to_dict()
+
 @project_routes.route('/tasks/new', methods=['POST'])
 def post_task():
   data = request.json
@@ -38,6 +52,14 @@ def post_task():
     db.session.add(task)
     db.session.commit()
     return task.to_dict()
+
+@project_routes.route('/tasks/complete', methods=['PUT'])
+def complete_task():
+  data = request.json
+  task = Task.query.get(data['task_id'])
+  task.is_complete = True
+  db.session.commit()
+  return task.to_dict()
 
 @project_routes.route('/sections/new', methods=['POST'])
 def post_section():

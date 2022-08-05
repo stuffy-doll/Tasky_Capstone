@@ -1,0 +1,55 @@
+#color-label-default {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: gray;
+}
+
+#color-label-brick {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: firebrick;
+}
+
+#color-label-baby {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: #FCB2A9;
+}
+
+#color-label-sea {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: #2E8B57;
+}
+
+#color-label-cherry {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: #F85329;
+}
+
+#color-label-pastel {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: #FDFD96;
+}
+
+#color-label-mint {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: #65FFEC;
+}
+
+#color-label-bright {
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background-color: #CE9EFF;
+}
