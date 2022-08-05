@@ -91,7 +91,7 @@ const ProjectForm = ({ userId, showModal }) => {
   return (
     <div className="modal">
       <div className="project-form-modal">
-        <button className="x-closeModal" onClick={() => showModal(false)}>X</button>
+        <button className="hide-modal" onClick={() => showModal(false)}>X</button>
         {valErrors.length > 0 && submitted && (
           <div className="form-errors">
             {valErrors.map((error, idx) => (
