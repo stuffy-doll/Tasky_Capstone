@@ -80,6 +80,13 @@ def update_task(task_id):
     db.session.commit()
     return task.to_dict();
 
+@project_routes.route('/tasks/<task_id>/delete', methods=['DELETE'])
+def delete_task(task_id):
+  task = Task.query.get(task_id)
+  print(task)
+  db.session.delete(task)
+  db.session.commit()
+  return task.to_dict()
 
 
 @project_routes.route('/sections/new', methods=['POST'])
