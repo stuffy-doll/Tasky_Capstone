@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateTask } from "../../store/tasks";
+import { updateTask, deleteTask } from "../../store/tasks";
 
 const TaskModal = ({ showModal, task }) => {
   const dispatch = useDispatch();
@@ -38,15 +38,19 @@ const TaskModal = ({ showModal, task }) => {
         setSubmitted(false);
         setShowForm(false);
         setValErrors([]);
-      }
-    }
-  }
+      };
+    };
+  };
 
-  console.log(showForm);
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    await dispatch(deleteTask(task.id))
+  }
 
   return (
     <div className="task-modal">
       <button className="hide-modal" onClick={() => showModal(false)}>X</button>
+      <button className="delete-task" onClick={handleDelete}>Delete Task</button>
       {!showForm && (
         <div className="task-info" onClick={() => setShowForm(true)}>
           <h3>{task.title}</h3>
