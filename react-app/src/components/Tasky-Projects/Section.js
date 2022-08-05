@@ -23,7 +23,7 @@ const Section = ({ userId, projects }) => {
         <div key={section.id}>
           <div className="section-card">
             {section.name}
-            <TaskList sectionId={section.id} />
+            <TaskList userId={userId} sectionId={section.id} projectId={projectId} />
           </div>
           <TaskForm sectionId={section.id} />
         </div>

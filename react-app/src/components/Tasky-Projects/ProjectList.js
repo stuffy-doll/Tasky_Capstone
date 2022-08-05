@@ -5,6 +5,7 @@ import ProtectedRoute from '../auth/ProtectedRoute';
 import { getProjects } from '../../store/projects';
 import Section from './Section';
 import ProjectForm from '../Forms/ProjectForm';
+import './css/project-list.css'
 
 const ProjectList = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const ProjectList = () => {
   return (
     <main className='project-box'>
       <div className='projects-list'>
+        {showModal && <ProjectForm userId={userId} showModal={setShowModal} />}
         <div className='new-project'>
           <p>New Project</p>
           <button onClick={() => setShowModal(true)}>+</button>
@@ -31,7 +33,7 @@ const ProjectList = () => {
             <h3 className='projects-header'>Favorites</h3>
             {favorites.map((favorite, idx) => (
               <div className='project-card' key={idx}>
-                <div className={`color-label-${favorite.color_label}`} />
+                <div id={`color-label-${favorite.color_label.split(' ')[0].toLowerCase()}`} />
                 <Link className='project-link' to={`/projects/${favorite.id}`}>{favorite.name}</Link>
               </div>
             ))}
@@ -40,11 +42,12 @@ const ProjectList = () => {
         <h3 className='projects-header'>Your Projects</h3>
         {projects.map(project => (
           <div className='project-card' key={project.id}>
+            <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />
+            {console.log(project.color_label)}
             <Link className='project-link' to={`/projects/${project.id}`}>{project.name}</Link>
           </div>
         ))}
       </div>
-      {showModal && <ProjectForm userId={userId} showModal={setShowModal} />}
       <ProtectedRoute path='/projects/:projectId' exact={true}>
         <Section userId={userId} projects={projects} />
       </ProtectedRoute>
