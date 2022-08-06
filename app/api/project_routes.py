@@ -36,6 +36,25 @@ def post_project():
     db.session.commit()
     return project.to_dict()
 
+@project_routes.route('/<project_id>/update', methods=['PUT'])
+def update_project(project_id):
+  project = Project.query.get(project_id)
+  data = request.json
+  print("DATA:: ", data)
+  if data:
+    project.name = data['name']
+    project.color_label = data['color']
+    project.is_favorite = data['favorite']
+    db.session.commit()
+    return project.to_dict()
+
+@project_routes.route('/<project_id>/delete', methods=['DELETE'])
+def delete_project(project_id):
+  project = Project.query.get(project_id)
+  db.session.delete(project)
+  db.session.commit()
+  return project.to_dict()
+
 @project_routes.route('/tasks/new', methods=['POST'])
 def post_task():
   data = request.json

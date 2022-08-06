@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { postProject } from "../../store/projects";
 import './css/project-modal.css'
 
 const ProjectForm = ({ userId, showModal }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [projName, setProjName] = useState("");
   const [colorLabel, setColorLabel] = useState("Brick Brown");
@@ -37,6 +39,7 @@ const ProjectForm = ({ userId, showModal }) => {
         setFavorited(false);
         setSubmitted(false);
         showModal(false);
+        history.push(`/projects/${res.id}`)
       };
     };
   };
