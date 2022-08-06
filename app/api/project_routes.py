@@ -111,3 +111,10 @@ def update_section():
     section.name = data['name']
     db.session.commit()
     return section.to_dict()
+
+@project_routes.route('/sections/<section_id>/delete', methods=['DELETE'])
+def delete_section(section_id):
+  section = Section.query.get(section_id)
+  db.session.delete(section)
+  db.session.commit()
+  return section.to_dict()
