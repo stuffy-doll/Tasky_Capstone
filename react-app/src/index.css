@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Hind';
+  src: local('Hind'), url(./fonts/Hind-Regular.ttf), format('truetype');
+}
+
+body {
+  background-color: #3E3E3E;
+  font-family: 'Hind';
+  color: #DFDFDF;
+}
+
+a {
+  color: #dfdfdf;
+}
+
 * {
   margin: 0;
 }

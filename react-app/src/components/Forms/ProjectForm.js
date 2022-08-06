@@ -48,8 +48,6 @@ const ProjectForm = ({ userId, showModal }) => {
     setFavorited(!favorited);
   };
 
-  console.log(favorited);
-
   const colors = [
     'Brick Brown',
     'Sea Green',
