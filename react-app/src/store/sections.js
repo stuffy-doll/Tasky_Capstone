@@ -1,6 +1,7 @@
 const GET_SECTIONS = 'get/getSections';
 const POST_SECTION = 'post/postSection';
 const UPDATE_SECTION = 'put/updateSection';
+const DELETE_SECTION = 'delete/deleteSection';
 
 const getS = (payload) => ({
   type: GET_SECTIONS,
@@ -16,6 +17,11 @@ const putS = (payload) => ({
   type: UPDATE_SECTION,
   payload
 });
+
+const deleteS = (payload) => ({
+  type: DELETE_SECTION,
+  payload
+})
 
 export const getSections = (projectId) => async dispatch => {
   const res = await fetch(`/api/projects/sections/${projectId}`);
@@ -64,6 +70,22 @@ export const updateSection = (payload) => async dispatch => {
   };
 };
 
+export const deleteSection = (sectionId) => async dispatch => {
+  const res = await fetch(`/api/projects/sections/${sectionId}/delete`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(deleteS(data));
+    return data;
+  } else {
+    return {
+      "Message": "Unsuccessful"
+    };
+  };
+};
+
 const sectionReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
@@ -75,6 +97,9 @@ const sectionReducer = (state = {}, action) => {
       return newState
     case UPDATE_SECTION:
       newState[action.payload.id] = action.payload
+      return newState
+    case DELETE_SECTION:
+      delete newState[action.payload.id]
       return newState
     default:
       return state
