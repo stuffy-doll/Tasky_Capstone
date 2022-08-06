@@ -6,7 +6,6 @@ import Section from "./Section";
 
 const ProjectView = ({ userId, projects }) => {
   const projectId = +useParams().projectId;
-  console.log(useParams());
 
   const project = projects.find(project => project.id === projectId);
 

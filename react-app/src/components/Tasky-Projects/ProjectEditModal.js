@@ -38,8 +38,6 @@ const ProjectEditModal = ({ project, setShowEdit }) => {
     };
   };
 
-  console.log(favorite);
-
   const colorsv2 = [
     {
       color: 'Brick Brown',

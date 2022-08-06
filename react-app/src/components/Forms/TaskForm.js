@@ -17,7 +17,6 @@ const TaskForm = ({ sectionId }) => {
   const [dueDate, setDueDate] = useState(undefined);
   const [valErrors, setValErrors] = useState([])
   const [submitted, setSubmitted] = useState(false);
-  console.log(valErrors);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +43,6 @@ const TaskForm = ({ sectionId }) => {
       };
       const res = await dispatch(postTask(payload))
       if (res) {
-        console.log(res)
         setTitle('');
         setDescription('');
         setDueDate(new Date());
