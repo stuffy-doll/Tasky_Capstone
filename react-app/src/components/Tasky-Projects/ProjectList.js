@@ -6,6 +6,7 @@ import { getProjects } from '../../store/projects';
 import Section from './Section';
 import ProjectForm from '../Forms/ProjectForm';
 import './css/project-list.css'
+import ProjectView from './ProjectView';
 
 const ProjectList = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const ProjectList = () => {
         ))}
       </div>
       <ProtectedRoute path='/projects/:projectId' exact={true}>
-        <Section userId={userId} projects={projects} />
+        <ProjectView userId={userId} projects={projects} />
       </ProtectedRoute>
     </main>
   )

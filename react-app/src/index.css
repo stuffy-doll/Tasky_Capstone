@@ -1,1 +1,35 @@
-/* TODO Add site wide styles */
+* {
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  background-color: #8EEADB;
+  align-items: center;
+  height: 50px;
+}
+
+nav>img {
+  height: 40px;
+  width: auto;
+}
+
+::-webkit-scrollbar {
+  max-width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  width: 6px;
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 6px;
+  background: #00CAA9;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00f3cb;
+}

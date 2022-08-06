@@ -26,6 +26,8 @@ const TaskList = ({ sectionId }) => {
             <div className="task-card" key={task.id} onClick={() => setShowModal(true)}>
               <div className="task-header">
                 <input type="checkbox" disabled={false} onChange={async (e) => {
+                  e.preventDefault()
+                  setShowModal(false);
                   const payload = {
                     task_id: task.id
                   }
@@ -57,6 +59,7 @@ const TaskList = ({ sectionId }) => {
             <div className="task-card">
               <div className='task-header'>
                 <input type="checkbox" checked={true} disabled={false} onChange={async (e) => {
+                  e.preventDefault();
                   const payload = {
                     task_id: task.id
                   }
@@ -67,6 +70,7 @@ const TaskList = ({ sectionId }) => {
                   });
                   if (res) {
                     await dispatch(getTasks(sectionId))
+                    setShowModal(false);
                     return res.json()
                   } else {
                     return { "Message": "Unsuccessful" }

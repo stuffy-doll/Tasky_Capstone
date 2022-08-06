@@ -1,0 +1,22 @@
+.pre-task-form {
+  display: flex;
+  flex-direction: row;
+}
+
+.primary {
+  text-align: center;
+  background: #00CAA9;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  width: 40px;
+}
+
+.danger {
+  text-align: center;
+  background: #FF5555;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  width: 40px;
+}

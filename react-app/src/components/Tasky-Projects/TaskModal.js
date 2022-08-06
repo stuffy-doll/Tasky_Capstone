@@ -60,7 +60,7 @@ const TaskModal = ({ showModal, task }) => {
       {showForm && (
         <div className="edit-task-form">
           {valErrors.length > 0 && submitted && (
-            <div className="edit-task-errors">
+            <div className="form-errors">
               {valErrors.map((error, idx) => (
                 <p className="error" key={idx}>{error}</p>
               ))}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { postTask } from "../../store/tasks";
+import './css/tasks-form.css'
 
 const TaskForm = ({ sectionId }) => {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ const TaskForm = ({ sectionId }) => {
   const projectId = +useParams().projectId;
   const userId = useSelector(state => state.session.user.id);
 
+  const [keystroke] = useState(50);
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -73,6 +75,7 @@ const TaskForm = ({ sectionId }) => {
           <form onSubmit={handleSubmit}>
             <div className="task-inputs">
               <input type="text" placeholder="Task Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+              <p className={title.length > keystroke ? 'danger' : 'primary'}>{title.length}/{keystroke}</p>
               <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
               <input type="date" placeholder="Due Date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
             </div>

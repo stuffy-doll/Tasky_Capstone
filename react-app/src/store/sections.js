@@ -1,5 +1,6 @@
 const GET_SECTIONS = 'get/getSections';
 const POST_SECTION = 'post/postSection';
+const UPDATE_SECTION = 'put/updateSection';
 
 const getS = (payload) => ({
   type: GET_SECTIONS,
@@ -8,6 +9,11 @@ const getS = (payload) => ({
 
 const postS = (payload) => ({
   type: POST_SECTION,
+  payload
+});
+
+const putS = (payload) => ({
+  type: UPDATE_SECTION,
   payload
 });
 
@@ -41,6 +47,23 @@ export const postSection = (payload) => async dispatch => {
   };
 };
 
+export const updateSection = (payload) => async dispatch => {
+  const res = await fetch(`/api/projects/sections/update`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(putS(data));
+    return data;
+  } else {
+    return {
+      "Message": "Unsuccessful"
+    };
+  };
+};
+
 const sectionReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
@@ -48,6 +71,9 @@ const sectionReducer = (state = {}, action) => {
       action.payload.sections.forEach(section => newState[section.id] = section)
       return newState
     case POST_SECTION:
+      newState[action.payload.id] = action.payload
+      return newState
+    case UPDATE_SECTION:
       newState[action.payload.id] = action.payload
       return newState
     default:

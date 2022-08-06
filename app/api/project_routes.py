@@ -88,7 +88,6 @@ def delete_task(task_id):
   db.session.commit()
   return task.to_dict()
 
-
 @project_routes.route('/sections/new', methods=['POST'])
 def post_section():
   data = request.json
@@ -102,4 +101,13 @@ def post_section():
     db.session.add(section)
     db.session.commit()
     print(section.to_dict())
+    return section.to_dict()
+
+@project_routes.route('/sections/update', methods=['PUT'])
+def update_section():
+  data = request.json
+  if data:
+    section = Section.query.get(data['section_id'])
+    section.name = data['name']
+    db.session.commit()
     return section.to_dict()
