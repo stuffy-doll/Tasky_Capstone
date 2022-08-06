@@ -26,10 +26,10 @@ nav>img {
 
 ::-webkit-scrollbar-thumb {
   width: 6px;
-  background: #00CAA9;
+  background: #8EEADB;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f3cb;
+  background: #7adbcb;
 }

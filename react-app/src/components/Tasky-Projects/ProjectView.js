@@ -13,6 +13,7 @@ const ProjectView = ({ userId, projects }) => {
     <div className="project-view">
       <h2 className="project-heading">{project?.name}</h2>
       <Section userId={userId} projectId={projectId} />
+      <div className="side-padding"></div>
     </div>
   )
 }
