@@ -43,6 +43,7 @@ nav>img {
 }
 
 input {
+  color: #DFDFDF;
   height: 25px;
   border-style: hidden;
   border-radius: 5px;
@@ -67,7 +68,8 @@ select {
 
 ::-webkit-scrollbar-track {
   width: 6px;
-  background: #f1f1f1;
+  background: #303030;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -78,4 +80,43 @@ select {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #7adbcb;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  background-color: rgb(36, 36, 36);
+  height: 10.6vh;
+  justify-content: space-around;
+}
+
+.dev-links {
+  margin-top: 10px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tasky-description {
+  font-size: 14px;
+  width: 200px;
+  text-align: center;
+}
+
+.technologies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tech-images {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.tech-images>img {
+  max-height: 40px;
+  width: auto;
 }

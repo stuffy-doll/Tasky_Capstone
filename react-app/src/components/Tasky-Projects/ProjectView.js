@@ -20,7 +20,7 @@ const ProjectView = ({ userId, projects }) => {
         <div className="project-header-bar">
           <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />
           <h2 className="project-heading">{project?.name}</h2>
-          <button id="pencil" className="fa fa-pencil" onClick={() => setShowEdit(true)}></button>
+          <button id="pencil" className="fa fa-pencil-square-o" onClick={() => setShowEdit(true)}></button>
           <button id="trash" className="fa fa-trash-o" onClick={() => setShowDelete(true)}></button>
         </div>
         <Section userId={userId} projectId={projectId} />
