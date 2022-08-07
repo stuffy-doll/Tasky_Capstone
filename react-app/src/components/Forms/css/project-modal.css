@@ -1,19 +1,43 @@
 .modal {
+  margin: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(200, 200, 200, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .project-form-modal {
-  max-width: 500px;
-  max-height: 700px;
+  width: 200px;
+  height: 300px;
   border-radius: 12px;
-  background-color: white;
+  background-color: #4E4E4E;
+  box-shadow: 3px 3px 8px rgb(31, 31, 31);
   display: flex;
   flex-direction: column;
   padding: 25px;
+}
+
+.project-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.set-favorite {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.new-project-cancel {
+  border: none;
+  height: 20px;
+  width: auto;
+  background-color: #DE3C4B;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
 }

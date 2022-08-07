@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProtectedRoute from '../auth/ProtectedRoute';
 import { getProjects } from '../../store/projects';
-import Section from './Section';
 import ProjectForm from '../Forms/ProjectForm';
-import './css/project-list.css'
+import './css/project-view.css'
 import ProjectView from './ProjectView';
 
 const ProjectList = () => {
@@ -23,15 +22,15 @@ const ProjectList = () => {
 
   return (
     <main className='project-box'>
+      {showModal && <ProjectForm userId={userId} showModal={setShowModal} />}
       <div className='projects-list'>
-        {showModal && <ProjectForm userId={userId} showModal={setShowModal} />}
         <div className='new-project'>
           <p>New Project</p>
           <button onClick={() => setShowModal(true)}>+</button>
         </div>
         {favorites.length > 0 && (
           <div className='project-favorites'>
-            <h3 className='projects-header'>Favorites</h3>
+            <h4 className='projects-header'>Favorites</h4>
             {favorites.map((favorite, idx) => (
               <div className='project-card' key={idx}>
                 <div id={`color-label-${favorite.color_label.split(' ')[0].toLowerCase()}`} />
@@ -40,7 +39,7 @@ const ProjectList = () => {
             ))}
           </div>
         )}
-        <h3 className='projects-header'>Your Projects</h3>
+        <h4 className='projects-header'>Your Projects</h4>
         {projects.map(project => (
           <div className='project-card' key={project.id}>
             <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />

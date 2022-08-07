@@ -4,6 +4,8 @@
 }
 
 .primary {
+  margin-top: 4px;
+  padding: 2px;
   text-align: center;
   background: #00CAA9;
   color: white;
@@ -13,6 +15,8 @@
 }
 
 .danger {
+  margin-top: 4px;
+  padding: 2px;
   text-align: center;
   background: #FF5555;
   color: white;
