@@ -1,7 +1,7 @@
 .project-box {
+  margin: 0;
   display: flex;
   flex-direction: row;
-  border: 2px solid blue;
   max-width: 100vw;
   height: 80vh;
 }
@@ -11,7 +11,6 @@
 }
 
 .project-view {
-  border: 2px solid purple;
   width: 72%;
   height: 99.7%
 }
@@ -20,9 +19,90 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  border: 2px solid green;
+  border-right: 1px solid darkgray;
   min-width: 220px;
   max-width: 220px;
+}
+
+.new-project {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.new-project>button {
+  height: 24px;
+  width: 24px;
+  border-radius: 8px;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  background-color: #8EEADB;
+  color: #3E3E3E;
+  transition: transform .7s ease-in-out;
+}
+
+.new-project>button:hover {
+  transform: rotate(90deg);
+}
+
+.project-card {
+  display: flex;
+  margin-bottom: 4px;
+  padding: 6px;
+  flex-direction: row;
+  align-items: center;
+  height: 20px;
+  max-height: 20px;
+  border-radius: 8px;
+  transition: .4s ease
+}
+
+.project-card>a {
+  margin-left: 8px;
+  text-decoration: none;
+}
+
+.project-card:hover {
+  box-shadow: 3px 3px 4px black
+}
+
+.project-header-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+}
+
+#pencil {
+  background: none;
+  color: darkgray;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px;
+  margin-right: 2px;
+}
+
+#trash {
+  background: none;
+  width: 30px;
+  border: none;
+  color: red;
+  font-size: 20px;
+  border-radius: 8px;
+  margin-left: 2px;
+}
+
+#pencil:hover {
+  cursor: pointer;
+  background-color: #4e4e4e;
+}
+
+#trash:hover {
+  cursor: pointer;
+  background-color: #4e4e4e;
 }
 
 .section {
@@ -34,6 +114,11 @@
   overflow-x: auto;
 }
 
+.section-header {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .side-padding {
   margin: 0;
   width: 80px;
@@ -42,8 +127,10 @@
 .section-card {
   display: flex;
   margin: 10px;
+  padding: 6px;
   flex-direction: column;
   border: 2px solid orange;
+  border-radius: 8px;
   width: 250px;
   max-height: 700px;
   overflow-y: auto;

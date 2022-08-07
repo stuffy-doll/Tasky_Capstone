@@ -9,6 +9,7 @@ const ProjectForm = ({ userId, showModal }) => {
   const history = useHistory();
 
   const [projName, setProjName] = useState("");
+  const [keystroke] = useState(50);
   const [colorLabel, setColorLabel] = useState("Brick Brown");
   const [favorited, setFavorited] = useState(false);
   const [valErrors, setValErrors] = useState([]);
@@ -92,7 +93,6 @@ const ProjectForm = ({ userId, showModal }) => {
   return (
     <div className="modal">
       <div className="project-form-modal">
-        <button className="hide-modal" onClick={() => showModal(false)}>X</button>
         {valErrors.length > 0 && submitted && (
           <div className="form-errors">
             {valErrors.map((error, idx) => (
@@ -104,12 +104,14 @@ const ProjectForm = ({ userId, showModal }) => {
         <form onSubmit={handleSubmit}>
           <div className="project-inputs">
             <input type="text" placeholder="Project Name" value={projName} onChange={(e) => setProjName(e.target.value)} />
+            <p className={projName.length > keystroke ? 'danger' : 'primary'}>{projName.length}/{keystroke}</p>
             <select name='color' onChange={(e) => setColorLabel(e.target.value)}>
               {colorsv2.map((color, idx) => (
                 <option key={idx} style={{ color: color.code }} value={color.color}>{color.color}</option>
               ))}
             </select>
             <div className="set-favorite">
+              <p>Favorite: </p>
               <input type="checkbox" value={favorited} onChange={handleChange} />
             </div>
             <div className="new-project-buttons">

@@ -1,11 +1,11 @@
-@font-face {
+/* @font-face {
   font-family: 'Hind';
   src: local('Hind'), url(./fonts/Hind-Regular.ttf), format('truetype');
-}
+} */
 
 body {
   background-color: #3E3E3E;
-  font-family: 'Hind';
+  font-family: Arial, Helvetica, sans-serif;
   color: #DFDFDF;
 }
 
@@ -25,9 +25,40 @@ nav {
   height: 50px;
 }
 
+.unauth-nav>a {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+
+nav>div>a {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+
 nav>img {
   height: 40px;
   width: auto;
+}
+
+input {
+  height: 25px;
+  border-style: hidden;
+  border-radius: 5px;
+  background-color: #3E3E3E;
+}
+
+::placeholder {
+  color: #888888
+}
+
+select {
+  height: 25px;
+  border-style: hidden;
+  background-color: #3E3E3E;
+  border-radius: 5px;
+  color: darkgray
 }
 
 ::-webkit-scrollbar {

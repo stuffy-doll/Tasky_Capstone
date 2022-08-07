@@ -33,12 +33,12 @@ const Section = ({ userId, projectId }) => {
                   e.stopPropagation();
                   setShowForm(true)
                 }}>{section.name}</div>
-                <button onClick={async (e) => {
-                  e.preventDefault();
-                  await dispatch(deleteSection(section.id))
-                }}>Delete Section</button>
                 <TaskList userId={userId} sectionId={section.id} projectId={projectId} />
                 <TaskForm sectionId={section.id} />
+                <button id="trash" className="fa fa-trash-o" onClick={async (e) => {
+                  e.preventDefault();
+                  await dispatch(deleteSection(section.id))
+                }}></button>
               </div>
             )}
           </div >

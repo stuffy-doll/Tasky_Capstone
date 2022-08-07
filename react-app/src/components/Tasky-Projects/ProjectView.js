@@ -17,10 +17,11 @@ const ProjectView = ({ userId, projects }) => {
   if (projectParams.includes(projectId)) {
     return (
       <div className="project-view">
-        <div className="project-header bar">
+        <div className="project-header-bar">
+          <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />
           <h2 className="project-heading">{project?.name}</h2>
-          <button className="project-edit" onClick={() => setShowEdit(true)}>Edit Project</button>
-          <button className="project-delete" onClick={() => setShowDelete(true)}>Delete Project</button>
+          <button id="pencil" className="fa fa-pencil" onClick={() => setShowEdit(true)}></button>
+          <button id="trash" className="fa fa-trash-o" onClick={() => setShowDelete(true)}></button>
         </div>
         <Section userId={userId} projectId={projectId} />
         <div className="side-padding"></div>
