@@ -115,7 +115,7 @@ const ProjectForm = ({ userId, showModal }) => {
               <input type="checkbox" value={favorited} onChange={handleChange} />
             </div>
             <div className="new-project-buttons">
-              <button className="new-project-cancel" onClick={() => showModal(false)}>Cancel</button>
+              <button className="cancel" onClick={() => showModal(false)}>Cancel</button>
               <button type="submit">Create Project</button>
             </div>
           </div>

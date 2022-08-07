@@ -42,8 +42,8 @@ const SectionForm = ({ projectId }) => {
     <div className="add-section-field">
       {!showForm && (
         <div className="pre-section-form">
-          <p>Add Section</p>
           <button onClick={() => setShowForm(true)}>+</button>
+          <p>Add Section</p>
         </div>
       )}
       {showForm && (
@@ -59,7 +59,7 @@ const SectionForm = ({ projectId }) => {
             <div className="section-inputs">
               <input type="text" placeholder="Section Name" value={secName} onChange={(e) => setName(e.target.value)} />
             </div>
-            <button onClick={() => setShowForm(false)}>Cancel</button>
+            <button className="cancel" onClick={() => setShowForm(false)}>Cancel</button>
             <button type="submit">Add Section</button>
           </form>
         </div>

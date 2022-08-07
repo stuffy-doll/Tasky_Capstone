@@ -15,7 +15,7 @@
   height: 300px;
   border-radius: 12px;
   background-color: #4E4E4E;
-  box-shadow: 3px 3px 8px rgb(31, 31, 31);
+  box-shadow: 3px 3px 8px #1F1F1F;
   display: flex;
   flex-direction: column;
   padding: 25px;
@@ -32,7 +32,7 @@
   align-items: center;
 }
 
-.new-project-cancel {
+.cancel {
   border: none;
   height: 20px;
   width: auto;
@@ -40,4 +40,9 @@
   color: white;
   font-weight: 500;
   border-radius: 5px;
+}
+
+.cancel:hover {
+  cursor: pointer;
+  background-color: #f14d5d;
 }

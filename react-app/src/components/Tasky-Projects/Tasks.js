@@ -21,6 +21,15 @@ const TaskList = ({ sectionId }) => {
   return (
     <div className="task-list">
       <div className="unfinished-tasklist">
+        {unfinishedTasks.length === 0 && (
+          <></>
+        )}
+        {unfinishedTasks.length > 0 && (
+          <div className="unfinished-header">
+            <h4>In Progress</h4>
+            <p>{unfinishedTasks.length}</p>
+          </div>
+        )}
         {unfinishedTasks.map(task => (
           <>
             <div className="task-card" key={task.id} onClick={() => setShowModal(true)}>
@@ -53,7 +62,15 @@ const TaskList = ({ sectionId }) => {
         ))}
       </div>
       <div className="finished-tasklist">
-        <h3>Finished Tasks</h3>
+        {finishedTasks.length === 0 && (
+          <></>
+        )}
+        {finishedTasks.length > 0 && (
+          <div className="finished-header">
+            <h4>Complete</h4>
+            <p>{finishedTasks.length}</p>
+          </div>
+        )}
         {finishedTasks.map(task => (
           <div key={task.id}>
             <div className="task-card">
