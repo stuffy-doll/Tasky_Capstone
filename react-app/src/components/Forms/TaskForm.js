@@ -10,11 +10,13 @@ const TaskForm = ({ sectionId }) => {
   const projectId = +useParams().projectId;
   const userId = useSelector(state => state.session.user.id);
 
+  const time = new Date(Date.now() + 604800000).toString();
+
   const [keystroke] = useState(50);
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState(undefined);
+  const [dueDate, setDueDate] = useState(time);
   const [valErrors, setValErrors] = useState([])
   const [submitted, setSubmitted] = useState(false);
 
@@ -72,13 +74,15 @@ const TaskForm = ({ sectionId }) => {
           )}
           <form onSubmit={handleSubmit}>
             <div className="task-inputs">
-              <input type="text" placeholder="Task Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-              <p className={title.length > keystroke ? 'danger' : 'primary'}>{title.length}/{keystroke}</p>
-              <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+              <div className="task-title-input">
+                <input type="text" placeholder="Task Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <p className={title.length > keystroke ? 'danger' : 'primary'}>{title.length}/{keystroke}</p>
+              </div>
+              <textarea placeholder="Brief description..." value={description} onChange={(e) => setDescription(e.target.value)} />
               <input type="date" placeholder="Due Date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
             </div>
-            <button onClick={() => setShowForm(false)}>Cancel</button>
-            <button type="submit">Add Task</button>
+            <button className="cancel" onClick={() => setShowForm(false)}>Cancel</button>
+            <button className="add" type="submit">Add Task</button>
           </form>
         </div>
       )}

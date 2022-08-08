@@ -60,7 +60,7 @@ const SectionForm = ({ projectId }) => {
               <input type="text" placeholder="Section Name" value={secName} onChange={(e) => setName(e.target.value)} />
             </div>
             <button className="cancel" onClick={() => setShowForm(false)}>Cancel</button>
-            <button type="submit">Add Section</button>
+            <button className="add" type="submit">Add Section</button>
           </form>
         </div>
       )}

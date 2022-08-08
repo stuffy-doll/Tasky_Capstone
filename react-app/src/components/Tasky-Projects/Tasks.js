@@ -18,6 +18,11 @@ const TaskList = ({ sectionId }) => {
     dispatch(getTasks(sectionId));
   }, [dispatch, sectionId]);
 
+  const dateMaker = (date) => {
+    date = date.split(' ');
+    return `${date[0]} ${date[2]} ${date[1]}`
+  }
+
   return (
     <div className="task-list">
       <div className="unfinished-tasklist">
@@ -55,7 +60,7 @@ const TaskList = ({ sectionId }) => {
                 <h4 className="unfinished-task">{task.title}</h4>
               </div>
               <p>{task.description}</p>
-              <div>{task.due_date}</div>
+              <div className="due-date">Due: {dateMaker(task.due_date)}</div>
             </div>
             {showModal && <TaskModal showModal={setShowModal} task={task} />}
           </>
@@ -96,7 +101,7 @@ const TaskList = ({ sectionId }) => {
                 <h4 className="finished-task">{task.title}</h4>
               </div>
               <p>{task.description}</p>
-              <div>{task.due_date}</div>
+              <div className="due-date">Due: {dateMaker(task.due_date)}</div>
             </div>
           </div>
         ))}
