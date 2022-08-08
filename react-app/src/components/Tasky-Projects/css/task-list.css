@@ -1,4 +1,51 @@
 .task-card {
-  border: 2px solid black;
-  margin: 10px;
+  border: 1px solid rgb(117, 117, 117);
+  border-radius: 8px;
+  padding: 8px;
+  margin: 6px;
+  transition: .4s;
+  max-height: 90px;
+  overflow: auto
+}
+
+.task-card:hover {
+  box-shadow: 3px 3px 4px #1F1F1F;
+}
+
+.task-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.task-header>h4 {
+  margin-left: 6px;
+}
+
+.task-card>p {
+  margin-top: 6px;
+}
+
+.due-date {
+  margin-top: 6px;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.pre-task-form>button {
+  margin-right: 10px;
+  height: 24px;
+  width: 24px;
+  border-radius: 8px;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  background-color: #00CAA9;
+  color: #3E3E3E;
+  transition: transform .7s ease-in-out;
+}
+
+.pre-task-form>button:hover {
+  cursor: pointer;
+  transform: rotate(90deg);
 }

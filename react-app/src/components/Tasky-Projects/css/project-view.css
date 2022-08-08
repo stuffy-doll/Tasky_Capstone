@@ -39,7 +39,7 @@
   font-size: 18px;
   text-align: center;
   border: none;
-  background-color: #8EEADB;
+  background-color: #00CAA9;
   color: #3E3E3E;
   transition: transform .7s ease-in-out;
 }
@@ -163,7 +163,7 @@
   font-size: 18px;
   text-align: center;
   border: none;
-  background-color: #8EEADB;
+  background-color: #00CAA9;
   color: #3E3E3E;
   transition: transform .7s ease-in-out;
 }
@@ -207,7 +207,7 @@
 }
 
 .finished-header>h4 {
-  color: #8EEADB;
+  color: #00CAA9;
 }
 
 #color-label-default {

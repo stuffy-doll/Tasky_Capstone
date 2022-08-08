@@ -20,7 +20,7 @@ a {
 nav {
   display: flex;
   flex-direction: row;
-  background-color: #8EEADB;
+  background-color: #00CAA9;
   align-items: center;
   height: 50px;
 }
@@ -47,7 +47,8 @@ input {
   height: 25px;
   border-style: hidden;
   border-radius: 5px;
-  background-color: #3E3E3E;
+  background-color: rgb(54, 54, 54);
+  border: 1px solid rgb(117, 117, 117);
 }
 
 ::placeholder {
@@ -74,7 +75,7 @@ select {
 
 ::-webkit-scrollbar-thumb {
   width: 6px;
-  background: #8EEADB;
+  background: #00CAA9;
   border-radius: 10px;
 }
 
@@ -119,4 +120,19 @@ footer {
 .tech-images>img {
   max-height: 40px;
   width: auto;
+}
+
+.add {
+  border: none;
+  height: 20px;
+  width: auto;
+  background-color: #00CAA9;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+  margin-left: 8px;
+}
+
+.add:hover {
+  background-color: #17e9c6;
 }

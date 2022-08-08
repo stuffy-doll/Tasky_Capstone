@@ -116,7 +116,7 @@ const ProjectForm = ({ userId, showModal }) => {
             </div>
             <div className="new-project-buttons">
               <button className="cancel" onClick={() => showModal(false)}>Cancel</button>
-              <button type="submit">Create Project</button>
+              <button className="add" type="submit">Create Project</button>
             </div>
           </div>
 

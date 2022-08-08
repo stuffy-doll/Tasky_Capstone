@@ -1,6 +1,45 @@
 .pre-task-form {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.post-task-form {
+  border: 1px solid rgb(117, 117, 117);
+  border-radius: 8px;
+  padding: 8px;
+  margin: 6px;
+  overflow: auto
+}
+
+.task-inputs>textarea {
+  background-color: rgb(54, 54, 54);
+  color: #adadad;
+  border-radius: 8px;
+  min-width: 97%;
+  max-width: 97%;
+  min-height: 150px;
+  max-height: 250px;
+  margin-bottom: 8px;
+}
+
+.task-inputs>input {
+  margin-bottom: 8px;
+}
+
+.task-title-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.task-title-input>input {
+  width: 160px;
 }
 
 .primary {
