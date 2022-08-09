@@ -66,6 +66,46 @@ const ProjectEditModal = ({ project, setShowEdit }) => {
     {
       color: 'Bright Purple',
       code: '#CE9EFF'
+    },
+    {
+      color: 'Kobold Skin',
+      code: '#3D314A'
+    },
+    {
+      color: 'Reserved Orange',
+      code: '#D36135'
+    },
+    {
+      color: 'Perfect Sky',
+      code: '#D7B9D5'
+    },
+    {
+      color: 'River Medicine',
+      code: '#313628'
+    },
+    {
+      color: 'Crawling Green',
+      code: '#CADF9E'
+    },
+    {
+      color: 'Dry Bones',
+      code: '#D0E1D4'
+    },
+    {
+      color: 'Ghost Light',
+      code: '#E4DEE4'
+    },
+    {
+      color: 'Deep Beige',
+      code: '#E5B181'
+    },
+    {
+      color: 'Black Coral',
+      code: '#5E697F'
+    },
+    {
+      color: 'Mellow Apricot',
+      code: '#FFB86F'
     }
   ];
 
