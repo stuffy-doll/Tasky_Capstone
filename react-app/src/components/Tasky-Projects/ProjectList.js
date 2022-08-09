@@ -6,10 +6,12 @@ import { getProjects } from '../../store/projects';
 import ProjectForm from '../Forms/ProjectForm';
 import './css/project-view.css'
 import ProjectView from './ProjectView';
+import { getTasks } from '../../store/tasks';
 
 const ProjectList = () => {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.session.user.id);
+  const username = useSelector(state => state.session.user.username);
   const projects = useSelector(state => Object.values(state.projects));
 
   const favorites = projects.filter(project => project.is_favorite);
@@ -19,6 +21,16 @@ const ProjectList = () => {
   useEffect(() => {
     dispatch(getProjects(userId))
   }, [dispatch, userId]);
+
+  const greetings = [
+    `Welcome, ${username}!`,
+    `Let's get to work, ${username}.`,
+    `Let's get started, ${username}.`,
+    `What's on the agenda today?`,
+    `Hey, ${username}!`,
+    `Shoutouts to Pihort!`,
+    `${username}! You're here!`
+  ]
 
   return (
     <main className='project-box'>
@@ -50,6 +62,9 @@ const ProjectList = () => {
       <ProtectedRoute path='/projects/:projectId' exact={true}>
         <ProjectView userId={userId} projects={projects} />
       </ProtectedRoute>
+      <div className='getting-started'>
+        <h1 className='greeting'>{greetings[Math.floor(Math.random() * greetings.length)]}</h1>
+      </div>
     </main>
   )
 };
