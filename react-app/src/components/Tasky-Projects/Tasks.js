@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { getTasks } from "../../store/tasks";
-import ProtectedRoute from "../auth/ProtectedRoute";
 import './css/task-list.css'
 import TaskModal from "./TaskModal";
 
-const TaskList = ({ sectionId, projectId }) => {
+const TaskList = ({ sectionId }) => {
   const dispatch = useDispatch();
 
   const tasks = useSelector(state => Object.values(state.tasks))
@@ -76,6 +74,7 @@ const TaskList = ({ sectionId, projectId }) => {
             {showModal && (
               <TaskModal showModal={setShowModal} task={task} />
             )}
+            {/* Make each task listen to it's own state. */}
           </>
         ))}
       </div>
