@@ -19,6 +19,8 @@ const TaskForm = ({ sectionId }) => {
     return `${year}-${month < 10 ? '0' + (month + 1) : month + 1}-${day < 10 ? '0' + day : day}`
   }
 
+  console.log("TODAY:: ", dateFormatter(today))
+
   const [keystroke] = useState(50);
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");

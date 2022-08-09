@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getTasks } from "../../store/tasks";
+import { Link, Route } from "react-router-dom";
 import './css/task-list.css'
 import TaskModal from "./TaskModal";
+import TaskView from "./TaskView";
 
-const TaskList = ({ sectionId }) => {
+const TaskList = ({ sectionId, projectId }) => {
   const dispatch = useDispatch();
 
   const tasks = useSelector(state => Object.values(state.tasks))
@@ -15,8 +17,8 @@ const TaskList = ({ sectionId }) => {
   const finishedTasks = tasks.filter(task => task.is_complete)
 
   useEffect(() => {
-    dispatch(getTasks(sectionId));
-  }, [dispatch, sectionId]);
+    dispatch(getTasks(projectId));
+  }, [dispatch, projectId]);
 
   const determineDue = (date) => {
     date = new Date(date.slice(0, -4))
@@ -46,7 +48,7 @@ const TaskList = ({ sectionId }) => {
         )}
         {unfinishedTasks.map(task => (
           <>
-            <div className="task-card" key={task.id} onClick={() => setShowModal(true)}>
+            <div className="task-card" key={task.id}>
               <div className="task-header">
                 <input type="checkbox" disabled={false} onChange={async (e) => {
                   e.preventDefault()
@@ -60,13 +62,13 @@ const TaskList = ({ sectionId }) => {
                     body: JSON.stringify(payload)
                   });
                   if (res) {
-                    await dispatch(getTasks(sectionId))
+                    await dispatch(getTasks(projectId))
                     return res.json();
                   } else {
                     return { "Message": "Unsuccessful" }
                   }
                 }} />
-                <h4 className="unfinished-task">{task.title}</h4>
+                <Link className="unfinished-task" to={`/projects/${projectId}/task/${task.id}`}>{task.title}</Link>
               </div>
               <p>{task.description}</p>
               <div className={determineDue(task.due_date).includes('overdue') ? 'overdue' : 'due'}>{determineDue(task.due_date)}</div>
@@ -103,7 +105,7 @@ const TaskList = ({ sectionId }) => {
                     body: JSON.stringify(payload)
                   });
                   if (res) {
-                    await dispatch(getTasks(sectionId))
+                    await dispatch(getTasks(projectId))
                     setShowModal(false);
                     return res.json()
                   } else {

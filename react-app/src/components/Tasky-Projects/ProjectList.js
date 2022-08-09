@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import ProtectedRoute from '../auth/ProtectedRoute';
 import { getProjects } from '../../store/projects';
 import ProjectForm from '../Forms/ProjectForm';
 import './css/project-view.css'
 import ProjectView from './ProjectView';
+import TaskView from './TaskView';
 import { getTasks } from '../../store/tasks';
 
 const ProjectList = () => {
@@ -59,12 +60,19 @@ const ProjectList = () => {
           </div>
         ))}
       </div>
-      <ProtectedRoute path='/projects/:projectId' exact={true}>
-        <ProjectView userId={userId} projects={projects} />
-      </ProtectedRoute>
-      <div className='getting-started'>
-        <h1 className='greeting'>{greetings[Math.floor(Math.random() * greetings.length)]}</h1>
-      </div>
+      <Switch>
+        <ProtectedRoute path='/projects' exact={true}>
+          <div className='getting-started'>
+            <h1 className='greeting'>{greetings[Math.floor(Math.random() * greetings.length)]}</h1>
+          </div>
+        </ProtectedRoute>
+        <ProtectedRoute path='/projects/:projectId' exact={true}>
+          <ProjectView userId={userId} projects={projects} />
+        </ProtectedRoute>
+        <ProtectedRoute path='/projects/:projectId/task/:taskId' exact={true}>
+          <TaskView />
+        </ProtectedRoute>
+      </Switch>
     </main>
   )
 };
