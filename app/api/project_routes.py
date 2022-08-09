@@ -1,26 +1,17 @@
 from flask import Blueprint, request
 from flask_login import login_required
 from app.models import db, Project, Section, Task, Comment
+from datetime import date
 
 project_routes = Blueprint('projects', __name__)
+
+# PROJECT ROUTES
 
 @project_routes.route('/<user_id>')
 def get_projects(user_id):
   query = Project.query.filter_by(user_id=user_id).all()
   projects = [project.to_dict() for project in query]
   return { "projects": projects }
-
-@project_routes.route('/sections/<project_id>')
-def get_sections(project_id):
-  query = Section.query.filter_by(project_id=project_id).all()
-  sections = [section.to_dict() for section in query]
-  return { "sections": sections }
-
-@project_routes.route('/tasks/<section_id>')
-def get_tasks(section_id):
-  query = Task.query.filter_by(section_id=section_id).all()
-  tasks = [task.to_dict() for task in query]
-  return { "tasks": tasks }
 
 @project_routes.route('/new', methods=['POST'])
 def post_project():
@@ -55,6 +46,14 @@ def delete_project(project_id):
   db.session.commit()
   return project.to_dict()
 
+# TASK ROUTES
+
+@project_routes.route('/tasks/<section_id>')
+def get_tasks(section_id):
+  query = Task.query.filter_by(section_id=section_id).all()
+  tasks = [task.to_dict() for task in query]
+  return { "tasks": tasks }
+
 @project_routes.route('/tasks/new', methods=['POST'])
 def post_task():
   data = request.json
@@ -85,6 +84,7 @@ def incomplete_task():
   data = request.json
   task = Task.query.get(data['task_id'])
   task.is_complete = False
+  task.due_date = date.today()
   db.session.commit()
   return task.to_dict()
 
@@ -106,6 +106,14 @@ def delete_task(task_id):
   db.session.delete(task)
   db.session.commit()
   return task.to_dict()
+
+# SECTION ROUTES
+
+@project_routes.route('/sections/<project_id>')
+def get_sections(project_id):
+  query = Section.query.filter_by(project_id=project_id).all()
+  sections = [section.to_dict() for section in query]
+  return { "sections": sections }
 
 @project_routes.route('/sections/new', methods=['POST'])
 def post_section():

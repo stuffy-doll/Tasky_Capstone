@@ -10,13 +10,20 @@ const TaskForm = ({ sectionId }) => {
   const projectId = +useParams().projectId;
   const userId = useSelector(state => state.session.user.id);
 
-  const time = new Date(Date.now() + 604800000).toString();
+  const today = new Date(Date.now());
+
+  const dateFormatter = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    return `${year}-${month < 10 ? '0' + (month + 1) : month + 1}-${day < 10 ? '0' + day : day}`
+  }
 
   const [keystroke] = useState(50);
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState(time);
+  const [dueDate, setDueDate] = useState(dateFormatter(today));
   const [valErrors, setValErrors] = useState([])
   const [submitted, setSubmitted] = useState(false);
 
@@ -35,6 +42,7 @@ const TaskForm = ({ sectionId }) => {
       setValErrors(errors);
       return;
     } else {
+      console.log("DUE DATE:: ", dueDate)
       const payload = {
         user_id: userId,
         project_id: projectId,
@@ -47,7 +55,7 @@ const TaskForm = ({ sectionId }) => {
       if (res) {
         setTitle('');
         setDescription('');
-        setDueDate(new Date());
+        setDueDate(dateFormatter(today));
         setShowForm(false)
         setValErrors([]);
         setSubmitted(false);

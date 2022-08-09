@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getTasks } from "../../store/tasks";
+import ProtectedRoute from "../auth/ProtectedRoute";
 import './css/task-list.css'
 import TaskModal from "./TaskModal";
 
-const TaskList = ({ sectionId }) => {
+const TaskList = ({ sectionId, projectId }) => {
   const dispatch = useDispatch();
 
   const tasks = useSelector(state => Object.values(state.tasks))
@@ -18,9 +20,18 @@ const TaskList = ({ sectionId }) => {
     dispatch(getTasks(sectionId));
   }, [dispatch, sectionId]);
 
-  const dateMaker = (date) => {
-    date = date.split(' ');
-    return `${date[0]} ${date[2]} ${date[1]}`
+  const determineDue = (date) => {
+    date = new Date(date.slice(0, -4))
+    const today = new Date(Date.now());
+
+    if (today.getDate() > date.getDate()) {
+      return `${today.getDate() - date.getDate()} day(s) overdue.`
+    } else if (today.getDate() === date.getDate()) {
+      return `Due today.`
+    } else {
+      date = date.toString().split(' ');
+      return `Due ${date[0]}, ${date[1]} ${date[2]}`
+    }
   }
 
   return (
@@ -60,9 +71,11 @@ const TaskList = ({ sectionId }) => {
                 <h4 className="unfinished-task">{task.title}</h4>
               </div>
               <p>{task.description}</p>
-              <div className="due-date">Due: {dateMaker(task.due_date)}</div>
+              <div className={determineDue(task.due_date).includes('overdue') ? 'overdue' : 'due'}>{determineDue(task.due_date)}</div>
             </div>
-            {showModal && <TaskModal showModal={setShowModal} task={task} />}
+            {showModal && (
+              <TaskModal showModal={setShowModal} task={task} />
+            )}
           </>
         ))}
       </div>
@@ -101,7 +114,6 @@ const TaskList = ({ sectionId }) => {
                 <h4 className="finished-task">{task.title}</h4>
               </div>
               <p>{task.description}</p>
-              <div className="due-date">Due: {dateMaker(task.due_date)}</div>
             </div>
           </div>
         ))}

@@ -3,7 +3,7 @@ from datetime import date
 
 def seed_projects():
   demo_x = Project(
-    user_id=1, name='Demo Project', color_label='Brick Brown', is_favorite=False, is_default=True
+    user_id=1, name='Your Tasks', color_label='Default Coal', is_favorite=False, is_default=True
   )
 
   demo_y = Project(
@@ -44,7 +44,7 @@ def seed_tasks():
   )
 
   demo_t_sy = Task(
-    user_id=1, project_id=1, section_id=2, title='Demo Task', description='This is a demo task.'
+    user_id=1, project_id=1, section_id=2, title='Demo Task', description='This is an overdue task.', due_date=date.fromisoformat('2022-08-03')
   )
 
   demo_t_sz = Task(
