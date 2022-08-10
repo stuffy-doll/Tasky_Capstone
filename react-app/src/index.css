@@ -135,7 +135,7 @@ footer {
   display: flex;
   flex-direction: row;
   padding: 20px;
-  width: 96vw;
+  width: 98%;
   background-color: rgb(36, 36, 36);
   height: 10.6vh;
   justify-content: space-around;

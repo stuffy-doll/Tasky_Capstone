@@ -4,7 +4,6 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { getSections } from "../../store/sections";
 import { deleteTask, getTasks, updateTask } from "../../store/tasks";
 import './css/task-view.css'
-import NotFound from "./NotFound";
 
 const TaskView = () => {
   const dispatch = useDispatch();
@@ -41,21 +40,29 @@ const TaskView = () => {
 
   const [showTextForm, setShowTextForm] = useState(false);
   const [keystroke] = useState(50);
-  const [title, setTitle] = useState(task?.title);
-  const [description, setDescription] = useState(task?.description);
-  const [dueDate, setDueDate] = useState(dateFormatter(task?.due_date));
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState(dateFormatter(""));
   const [valErrors, setValErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
   console.log("TITLE:: ", title);
   console.log("DESCRIPTION:: ", description);
-  console.log("DUE DATE:: ", dueDate)
+  console.log("DUE DATE:: ", dueDate);
 
   useEffect(() => {
     dispatch(getTasks(projectId));
     console.log("Use effect triggers")
     dispatch(getSections(projectId));
   }, [dispatch, projectId]);
+
+  const handleEdit = (task) => {
+    console.log("HANDLE EDIT FORM TASK:: ", task);
+    setTitle(task.title);
+    setDescription(task.description);
+    setDueDate(dateFormatter(task.due_date));
+    setShowTextForm(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -107,7 +114,7 @@ const TaskView = () => {
 
   if (!task || !section || !project) {
     return (
-      <NotFound />
+      <h1>Hello</h1>
     )
   } else {
 
@@ -119,7 +126,7 @@ const TaskView = () => {
             <div className="task-heading-bar">
               <h2 className="task-header">{task.title}</h2>
               <div className="task-actions">
-                <div id="pencil" className="fa fa-pencil-square-o" onClick={() => setShowTextForm(true)} />
+                <div id="pencil" className="fa fa-pencil-square-o" onClick={() => handleEdit(task)} />
                 <div id="trash" className="fa fa-trash-o" onClick={async (e) => {
                   e.preventDefault();
                   await dispatch(deleteTask(task.id));
@@ -140,8 +147,8 @@ const TaskView = () => {
             )}
             <form className="edit-task-form" onSubmit={handleSubmit}>
               <div className="task-td-inputs">
-                <input type="text" placeholder="Task Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                <div className={title.length > keystroke ? 'danger' : 'primary'} >{title.length}/{keystroke}</div>
+                <input type="text" placeholder="Task Title" value={title || ''} onChange={(e) => setTitle(e.target.value)} />
+                <div className={title && (title.length > keystroke) ? 'danger' : 'primary'} >{title.length}/{keystroke}</div>
                 <textarea name="description" placeholder="Write a description here..." value={description} onChange={(e) => setDescription(e.target.value)} />
                 <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
               </div>
