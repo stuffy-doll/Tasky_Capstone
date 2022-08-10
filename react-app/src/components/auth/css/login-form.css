@@ -1,0 +1,59 @@
+.login-form-view {
+  height: 80vh;
+}
+
+.login-header {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  min-width: 400px;
+  max-width: 400px;
+  height: 250px;
+  max-height: 450px;
+  border: 1px solid #757575;
+  border-radius: 10px;
+}
+
+.login-inputs {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.login-inputs>input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.login-button {
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 5px;
+  width: 140px;
+  background-color: #00CAA9;
+}
+
+.to-signup {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #00CAA9
+}
+
+.tasky-brief>img {
+  width: 200px;
+  height: auto;
+}

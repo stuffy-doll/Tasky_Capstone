@@ -12,16 +12,18 @@ const NavBar = () => {
   return (
     <div className='nav-bar'>
       {!userId && (
-        <div className='auth-nav'>
+        <div className='unauth-user-nav'>
           <nav className='unauth-nav'>
-            <img className='tasky-logo' src="https://i.imgur.com/GaciySq.jpg" alt="Tasky Logo" />
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
-            </NavLink>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
-            </NavLink>
-            <button onClick={async (e) => {
+            <div className='login-signup'>
+              <NavLink to='/login' exact={true} activeClassName='active'>
+                Login
+              </NavLink>
+              <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                Sign Up
+              </NavLink>
+            </div>
+            <img className='tasky-logo' src="https://i.imgur.com/6AsCOz2.png" alt="Tasky Logo" />
+            <button className="demo-login" onClick={async (e) => {
               e.preventDefault();
               await dispatch(login('demo@aa.io', 'password'))
             }}>Demo Login</button>
@@ -30,8 +32,9 @@ const NavBar = () => {
       )
       }
       {userId && (
-        <nav>
-          <img className='tasky-logo' src="https://i.imgur.com/GaciySq.jpg" alt="Tasky Logo" />
+        <nav className='auth-user-nav'>
+          <div></div>
+          <img className='tasky-logo' src="https://i.imgur.com/6AsCOz2.png" alt="Tasky Logo" />
           <div>
             <LogoutButton />
           </div>

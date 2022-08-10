@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import ProjectList from './components/Tasky-Projects/ProjectList';
+import NotFound from './components/Tasky-Projects/NotFound';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -35,18 +36,15 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
         <ProtectedRoute path='/projects' exact={false} >
           <ProjectList />
         </ProtectedRoute>
+        <Route>
+          <NotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

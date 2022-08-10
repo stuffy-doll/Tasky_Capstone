@@ -4,6 +4,7 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { getSections } from "../../store/sections";
 import { deleteTask, getTasks, updateTask } from "../../store/tasks";
 import './css/task-view.css'
+import NotFound from "./NotFound";
 
 const TaskView = () => {
   const dispatch = useDispatch();
@@ -17,10 +18,10 @@ const TaskView = () => {
     .find(task => task.id === taskId);
 
   const section = useSelector(state => Object.values(state.sections)
-    .find(section => section.id === task.section_id));
+    .find(section => section.id === task?.section_id));
 
   const project = useSelector(state => Object.values(state.projects)
-    .find(project => project.id === task.project_id));
+    .find(project => project.id === task?.project_id));
 
   const dateFormatter = (date) => {
     if (date) {
@@ -106,7 +107,7 @@ const TaskView = () => {
 
   if (!task || !section || !project) {
     return (
-      <h1>Hello</h1>
+      <NotFound />
     )
   } else {
 

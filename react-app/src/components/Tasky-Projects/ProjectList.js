@@ -17,10 +17,20 @@ const ProjectList = () => {
 
   const favorites = projects.filter(project => project.is_favorite);
 
+  const [value, setValue] = useState('Checking value...')
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    dispatch(getProjects(userId))
+  useEffect(async () => {
+    let isMounted = true;
+    await dispatch(getProjects(userId))
+      .then(() => {
+        if (isMounted) {
+          setValue('...Done!');
+        };
+      });
+    return () => {
+      isMounted = false;
+    }
   }, [dispatch, userId]);
 
   const greetings = [

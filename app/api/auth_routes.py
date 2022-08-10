@@ -59,6 +59,15 @@ def fill_user_defaults(user):
         user_id=user.id,
         project_id=user_default.id,
         section_id=getting_started.id,
+        title='Modifying Tasks',
+        description='Click on the title of this task or any task you create! You will be taken to a page with all of the tasks details, and you can modify a task from that page. Tasks can be marked as complete or incomplete conveniently from the project page!',
+        due_date=date.today(),
+        is_complete=False
+    )
+    t5 = Task(
+        user_id=user.id,
+        project_id=user_default.id,
+        section_id=getting_started.id,
         title='Happy Tasking!',
         description='Feel free to delete this section if you want, and thanks for visiting Tasky!',
         due_date=date.today(),
@@ -68,6 +77,7 @@ def fill_user_defaults(user):
     db.session.add(t2)
     db.session.add(t3)
     db.session.add(t4)
+    db.session.add(t5)
     db.session.commit()
     pass
 

@@ -18,8 +18,10 @@ const SignUpForm = () => {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
         setErrors(data)
-      }
-    }
+      } else {
+        return <Redirect to='/projects' />
+      };
+    };
   };
 
   const updateUsername = (e) => {
@@ -39,7 +41,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/projects' />;
   }
 
   return (

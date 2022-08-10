@@ -216,6 +216,20 @@
   color: #00CAA9;
 }
 
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  color: rgb(173, 173, 173);
+}
+
+.not-found>img {
+  margin-top: 15px;
+  width: 300px;
+  height: auto;
+}
+
 #color-label-default {
   height: 10px;
   width: 10px;
