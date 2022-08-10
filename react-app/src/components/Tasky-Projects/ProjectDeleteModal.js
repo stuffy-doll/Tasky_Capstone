@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteProject } from "../../store/projects";
+import './css/delete-project-modal.css'
 
 const ProjectDeleteModal = ({ project, setShowDelete }) => {
   const dispatch = useDispatch();
@@ -19,11 +20,13 @@ const ProjectDeleteModal = ({ project, setShowDelete }) => {
 
   return (
     <div className="project-delete-modal">
-      <h3>Delete Project</h3>
-      <p>Are you sure you want to delete {project.name} and {tasks.length} unfinished tasks?</p>
-      <div className="project-delete-actions">
-        <button onClick={() => setShowDelete(false)}>Cancel</button>
-        <button onClick={handleDelete}>Confirm</button>
+      <div className="project-delete">
+        <h2>Delete Project</h2>
+        <p>Are you sure you want to delete {project.name} and {tasks.length} unfinished tasks?</p>
+        <div className="project-delete-actions">
+          <button className="cancel" onClick={() => setShowDelete(false)}>Cancel</button>
+          <button className="save" onClick={handleDelete}>Confirm</button>
+        </div>
       </div>
     </div>
   )

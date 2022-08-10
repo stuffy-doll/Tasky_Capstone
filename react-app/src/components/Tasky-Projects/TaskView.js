@@ -138,6 +138,16 @@ const TaskView = () => {
         )}
         {showTextForm && (
           <div className="task-td-edit">
+            <form className="edit-task-form" onSubmit={handleSubmit}>
+              <div className="task-title-edit">
+                <input type="text" placeholder="Task Title" value={title || ''} onChange={(e) => setTitle(e.target.value)} />
+                <div className={title && (title.length > keystroke) ? 'danger' : 'primary'} >{title.length}/{keystroke}</div>
+              </div>
+              <div className="edit-task-actions">
+                <button className="cancel" onClick={() => setShowTextForm(false)}>Cancel</button>
+                <button className="save" type="submit">Save</button>
+              </div>
+            </form>
             {valErrors.length > 0 && submitted && (
               <div className="form-errors">
                 {valErrors.map((error, idx) => (
@@ -145,16 +155,6 @@ const TaskView = () => {
                 ))}
               </div>
             )}
-            <form className="edit-task-form" onSubmit={handleSubmit}>
-              <div className="task-td-inputs">
-                <input type="text" placeholder="Task Title" value={title || ''} onChange={(e) => setTitle(e.target.value)} />
-                <div className={title && (title.length > keystroke) ? 'danger' : 'primary'} >{title.length}/{keystroke}</div>
-                <textarea name="description" placeholder="Write a description here..." value={description} onChange={(e) => setDescription(e.target.value)} />
-                <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
-              </div>
-              <button className="cancel" onClick={() => setShowTextForm(false)}>Cancel</button>
-              <button className="save" type="submit">Save</button>
-            </form>
           </div>
         )}
         <div className="task-locale">
@@ -165,23 +165,39 @@ const TaskView = () => {
           </div>
           <h4 className="task-section-locale">Under Section: {section.name}</h4>
         </div>
-        {task.description && (
-          <div className="description-box">
-            <p className="task-description">{task.description}</p>
-          </div>
+        {!showTextForm && (
+          <>
+            {task.description && (
+              <div className="description-box">
+                <p className="task-description">{task.description}</p>
+              </div>
+            )}
+            {!task.description && (
+              <p className="task-description">No Description...</p>
+            )}
+          </>
         )}
-        {!task.description && (
-          <p className="task-description">No Description...</p>
+        {showTextForm && (
+          <textarea className="description-edit" name="description" placeholder="Write a description here..." value={description} onChange={(e) => setDescription(e.target.value)} />
         )}
-        {task.is_complete && (
-          <div className="date">Complete</div>
+        {!showTextForm && (
+          <>
+            {task.is_complete && (
+              <div className="date">Complete</div>
+            )}
+            {!task.is_complete && (
+              <div className="date">
+                <h4 className={determineDue(task.due_date).includes('overdue') ? 'overdue' : 'due'}>{determineDue(task.due_date)}</h4>
+              </div>
+            )}
+          </>
         )}
-        {!task.is_complete && (
-          <div className="date">
-            <h4 className={determineDue(task.due_date).includes('overdue') ? 'overdue' : 'due'}>{determineDue(task.due_date)}</h4>
-          </div>
+        {showTextForm && (
+          <input className="date-edit" type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
         )}
-        <Link className="project-return" to={`/projects/${projectId}`}>Return to Project</Link>
+        {!showTextForm && (
+          <Link className="project-return" to={`/projects/${projectId}`}>Return to Project</Link>
+        )}
       </div>
     )
   }

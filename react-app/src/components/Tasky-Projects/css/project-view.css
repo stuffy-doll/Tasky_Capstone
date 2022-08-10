@@ -191,6 +191,11 @@
   transition: .4s;
 }
 
+.section-inputs>p {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
 .post-section-form:hover {
   box-shadow: 3px 3px 4px #1F1F1F;
 }
@@ -215,6 +220,13 @@
 
 .finished-header>h4 {
   color: #00CAA9;
+}
+
+.finished-task {
+  color: #a7a7a7;
+  font-style: italic;
+  text-decoration: line-through;
+  margin-left: 8px;
 }
 
 .not-found {

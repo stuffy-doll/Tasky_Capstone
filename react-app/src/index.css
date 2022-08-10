@@ -137,7 +137,7 @@ footer {
   padding: 20px;
   width: 98%;
   background-color: rgb(36, 36, 36);
-  height: 10.6vh;
+  height: 8.8vh;
   justify-content: space-around;
 }
 
@@ -184,4 +184,14 @@ footer {
 
 .add:hover {
   background-color: #17e9c6;
+}
+
+.save {
+  border: none;
+  height: 20px;
+  width: auto;
+  background-color: #e69600;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
 }

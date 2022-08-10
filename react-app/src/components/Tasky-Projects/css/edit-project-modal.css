@@ -1,0 +1,49 @@
+.project-edit-modal {
+  height: 80vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+}
+
+.project-edit-box {
+  width: 200px;
+  min-height: 300px;
+  max-height: 350px;
+  border-radius: 12px;
+  background-color: #4E4E4E;
+  box-shadow: 3px 3px 8px #1F1F1F;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.project-edit-box>h2 {
+  margin-bottom: 10px;
+}
+
+.project-edit-inputs-title>p {
+  margin-top: 8px;
+}
+
+.project-edit-inputs>select {
+  margin-top: 8px;
+}
+
+.favorite-box {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.favorite-box>label {
+  margin-right: 8px;
+}
+
+.project-edit-actions {
+  margin-top: 120px;
+}

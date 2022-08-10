@@ -144,7 +144,7 @@ const ProjectForm = ({ userId, showModal }) => {
         <form onSubmit={handleSubmit}>
           <div className="project-inputs">
             <input type="text" placeholder="Project Name" value={projName} onChange={(e) => setProjName(e.target.value)} />
-            <p className={projName.length > keystroke ? 'danger' : 'primary'}>{projName.length}/{keystroke}</p>
+            <p className={!projName.length || (projName.length > keystroke) ? 'danger' : 'primary'}>{projName.length}/{keystroke}</p>
             <select name='color' onChange={(e) => setColorLabel(e.target.value)}>
               {colorsv2.map((color, idx) => (
                 <option key={idx} style={{ color: color.code }} value={color.color}>{color.color}</option>
