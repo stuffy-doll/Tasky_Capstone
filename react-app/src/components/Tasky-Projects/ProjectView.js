@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom"
+import NotFound from "./NotFound";
 import ProjectDeleteModal from "./ProjectDeleteModal";
 import ProjectEditModal from "./ProjectEditModal";
 import Section from "./Section";
@@ -33,7 +34,7 @@ const ProjectView = ({ userId, projects }) => {
     )
   } else {
     return (
-      <h1>404: Not Found</h1>
+      <NotFound />
     )
   }
 }
