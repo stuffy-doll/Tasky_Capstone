@@ -86,7 +86,7 @@ const TaskForm = ({ sectionId }) => {
             <div className="task-inputs">
               <div className="task-title-input">
                 <input type="text" placeholder="Task Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                <p className={title.length > keystroke ? 'danger' : 'primary'}>{title.length}/{keystroke}</p>
+                <p className={!title.length || (title.length > keystroke) ? 'danger' : 'primary'}>{title.length}/{keystroke}</p>
               </div>
               <textarea placeholder="Brief description..." value={description} onChange={(e) => setDescription(e.target.value)} />
               <input type="date" placeholder="Due Date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />

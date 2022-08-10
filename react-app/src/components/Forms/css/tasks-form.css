@@ -15,15 +15,20 @@
   overflow: auto
 }
 
+.task-td-edit {
+  border-bottom: 1px solid rgb(117, 117, 117);
+  margin-bottom: 12px;
+}
+
 .task-inputs>textarea {
-  background-color: rgb(54, 54, 54);
-  color: #adadad;
   border-radius: 8px;
   min-width: 97%;
   max-width: 97%;
   min-height: 150px;
   max-height: 250px;
   margin-bottom: 8px;
+  background-color: rgb(54, 54, 54);
+  color: #e0e0e0;
 }
 
 .task-inputs>input {
@@ -34,12 +39,41 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 12px;
 }
 
-.task-title-input>input {
-  width: 160px;
+.edit-task-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-title-edit>input {
+  margin-right: 10px;
+  height: 30px;
+  width: 300px;
+  font-size: 20px;
+}
+
+.description-edit {
+  margin-top: 40px;
+  background-color: rgb(54, 54, 54);
+  color: #e0e0e0;
+  border-radius: 8px;
+  min-width: 98%;
+  max-width: 98%;
+  min-height: 175px;
+  max-height: 350px;
+}
+
+.date-edit {
+  margin-top: 50px;
+  width: 200px;
+}
+
+.cancel {
+  margin-right: 8px;
 }
 
 .primary {

@@ -1,0 +1,30 @@
+.project-delete-modal {
+  height: 80vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+}
+
+.project-delete {
+  width: 500px;
+  min-height: 100px;
+  max-height: 200px;
+  border-radius: 12px;
+  background-color: #4E4E4E;
+  box-shadow: 3px 3px 8px #1F1F1F;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.project-delete>h2 {
+  margin-bottom: 20px;
+}
+
+.project-delete-actions {
+  margin-top: 20px;
+}

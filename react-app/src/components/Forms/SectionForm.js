@@ -8,6 +8,7 @@ const SectionForm = ({ projectId }) => {
   const userId = useSelector(state => state.session.user.id);
 
   const [showForm, setShowForm] = useState(false);
+  const [keystroke] = useState(50);
   const [secName, setName] = useState("");
   const [valErrors, setValErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false);
@@ -48,16 +49,17 @@ const SectionForm = ({ projectId }) => {
       )}
       {showForm && (
         <div className="post-section-form">
-          {valErrors.length > 0 && submitted && (
-            <div className="form-errors">
-              {valErrors.map((error, idx) => (
-                <div className="error" key={idx}>{error}</div>
-              ))}
-            </div>
-          )}
           <form onSubmit={handleSubmit}>
+            {valErrors.length > 0 && submitted && (
+              <div className="form-errors">
+                {valErrors.map((error, idx) => (
+                  <div className="error" key={idx}>{error}</div>
+                ))}
+              </div>
+            )}
             <div className="section-inputs">
-              <input type="text" placeholder="Section Name" value={secName} onChange={(e) => setName(e.target.value)} />
+              <input type="text" placeholder="Section Name (Required)" value={secName} onChange={(e) => setName(e.target.value)} />
+              <p className={!secName.length || (secName.length > keystroke) ? 'danger' : 'primary'}>{secName.length}/{keystroke}</p>
             </div>
             <button className="cancel" onClick={() => setShowForm(false)}>Cancel</button>
             <button className="add" type="submit">Add Section</button>
