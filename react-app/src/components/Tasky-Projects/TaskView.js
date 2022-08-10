@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { getSections } from "../../store/sections";
-import { getTasks, updateTask } from "../../store/tasks";
+import { deleteTask, getTasks, updateTask } from "../../store/tasks";
+import './css/task-view.css'
 
 const TaskView = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const projectId = +useParams().projectId;
   const taskId = +useParams().taskId;
@@ -113,14 +115,17 @@ const TaskView = () => {
       <div className="task-view">
         {!showTextForm && (
           <div className="task-title-description">
-            <h2 className="task-header">{task.title}</h2>
-            {task.description && (
-              <p className="task-description">{task.description}</p>
-            )}
-            {!task.description && (
-              <p className="task-description">No Description...</p>
-            )}
-            <div id="pencil" className="fa fa-pencil-square-o" onClick={() => setShowTextForm(true)} />
+            <div className="task-heading-bar">
+              <h2 className="task-header">{task.title}</h2>
+              <div className="task-actions">
+                <div id="pencil" className="fa fa-pencil-square-o" onClick={() => setShowTextForm(true)} />
+                <div id="trash" className="fa fa-trash-o" onClick={async (e) => {
+                  e.preventDefault();
+                  await dispatch(deleteTask(task.id));
+                  history.push(`/projects/${projectId}`)
+                }} />
+              </div>
+            </div>
           </div>
         )}
         {showTextForm && (
@@ -145,13 +150,29 @@ const TaskView = () => {
           </div>
         )}
         <div className="task-locale">
-          <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />
-          <h4 className="task-project-locale">In Project: {project.name}</h4>
+          <div className="project-locale">
+            <h4>In Project: </h4>
+            <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />
+            <h4 className="task-project-locale">{project.name}</h4>
+          </div>
           <h4 className="task-section-locale">Under Section: {section.name}</h4>
         </div>
-        <div className="date">
-          <h4 className={determineDue(task.due_date).includes('overdue') ? 'overdue' : 'due'}>{determineDue(task.due_date)}</h4>
-        </div>
+        {task.description && (
+          <div className="description-box">
+            <p className="task-description">{task.description}</p>
+          </div>
+        )}
+        {!task.description && (
+          <p className="task-description">No Description...</p>
+        )}
+        {task.is_complete && (
+          <div className="date">Complete</div>
+        )}
+        {!task.is_complete && (
+          <div className="date">
+            <h4 className={determineDue(task.due_date).includes('overdue') ? 'overdue' : 'due'}>{determineDue(task.due_date)}</h4>
+          </div>
+        )}
         <Link className="project-return" to={`/projects/${projectId}`}>Return to Project</Link>
       </div>
     )

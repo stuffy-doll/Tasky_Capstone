@@ -70,7 +70,10 @@ const TaskList = ({ sectionId, projectId }) => {
                 }} />
                 <Link className="unfinished-task" to={`/projects/${projectId}/task/${task.id}`}>{task.title}</Link>
               </div>
-              <p>{task.description}</p>
+              <div className="task-card-description">
+
+                <p>{task.description}</p>
+              </div>
               <div className={determineDue(task.due_date).includes('overdue') ? 'overdue' : 'due'}>{determineDue(task.due_date)}</div>
             </div>
             {showModal && (
