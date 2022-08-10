@@ -23,8 +23,8 @@ const deleteT = (payload) => ({
   payload
 })
 
-export const getTasks = (sectionId) => async dispatch => {
-  const res = await fetch(`/api/projects/tasks/${sectionId}`);
+export const getTasks = (projectId) => async dispatch => {
+  const res = await fetch(`/api/projects/tasks/${projectId}`);
   if (res.ok) {
     const data = await res.json();
     dispatch(getT(data));

@@ -1,12 +1,75 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db, Project
+from app.models import User, db, Project, Section, Task
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from datetime import date
 
 from app.models.projects import Project
 
 auth_routes = Blueprint('auth', __name__)
+
+def fill_user_defaults(user):
+    user_default = Project(
+        user_id=user.id,
+        name='Your Tasks',
+        color_label='Default Coal',
+        is_favorite=False,
+        is_default=True
+    )
+    db.session.add(user_default)
+    db.session.commit()
+    print("::PROJECT PASS::")
+    getting_started = Section(
+        user_id=user.id,
+        project_id=user_default.id,
+        name='Getting Started'
+    )
+    db.session.add(getting_started)
+    db.session.commit()
+    print("::SECTION PASS::")
+    t1 = Task(
+        user_id=user.id,
+        project_id=user_default.id,
+        section_id=getting_started.id,
+        title='Create a Project!',
+        description=f'Hi, {user.username}! Create a new project by pushing the "+" button on the side bar.',
+        due_date=date.today(),
+        is_complete=False
+    )
+    t2 = Task(
+        user_id=user.id,
+        project_id=user_default.id,
+        section_id=getting_started.id,
+        title='Adding Sections',
+        description='Add a new section using the "+" button in the "Add Section" field of a project. You can add as many sections as you want to a project!',
+        due_date=date.today(),
+        is_complete=False
+    )
+    t3 = Task(
+        user_id=user.id,
+        project_id=user_default.id,
+        section_id=getting_started.id,
+        title='Adding Tasks',
+        description='Tasks are added by using the "+" button in a section. Task due dates default to today! You can even add a brief (or long) description to a task if you so choose, but tasks must have a title.',
+        due_date=date.today(),
+        is_complete=False
+    )
+    t4 = Task(
+        user_id=user.id,
+        project_id=user_default.id,
+        section_id=getting_started.id,
+        title='Happy Tasking!',
+        description='Feel free to delete this section if you want, and thanks for visiting Tasky!',
+        due_date=date.today(),
+        is_complete=False
+    )
+    db.session.add(t1)
+    db.session.add(t2)
+    db.session.add(t3)
+    db.session.add(t4)
+    db.session.commit()
+    pass
 
 
 def validation_errors_to_error_messages(validation_errors):
@@ -56,6 +119,7 @@ def logout():
     return {'message': 'User logged out'}
 
 
+
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
     """
@@ -71,15 +135,7 @@ def sign_up():
         )
         db.session.add(user)
         db.session.commit()
-        user_default = Project(
-            user_id=user.id,
-            name='Your Tasks',
-            color_label='Default Coal',
-            is_favorite=False,
-            is_default=True
-        )
-        db.session.add(user_default)
-        db.session.commit()
+        fill_user_defaults(user)
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -48,9 +48,9 @@ def delete_project(project_id):
 
 # TASK ROUTES
 
-@project_routes.route('/tasks/<section_id>')
-def get_tasks(section_id):
-  query = Task.query.filter_by(section_id=section_id).all()
+@project_routes.route('/tasks/<project_id>')
+def get_tasks(project_id):
+  query = Task.query.filter_by(project_id=project_id).all()
   tasks = [task.to_dict() for task in query]
   return { "tasks": tasks }
 
@@ -96,6 +96,7 @@ def update_task(task_id):
   if data:
     task.title = data['title']
     task.description = data['description']
+    task.due_date = data['due_date']
     db.session.commit()
     return task.to_dict();
 

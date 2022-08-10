@@ -1,11 +1,19 @@
 .task-card {
-  border: 1px solid rgb(117, 117, 117);
+  border: 1px solid #757575;
   border-radius: 8px;
   padding: 8px;
   margin: 6px;
   transition: .4s;
   max-height: 90px;
-  overflow: auto
+  overflow: auto;
+}
+
+.task-card::-webkit-scrollbar-track {
+  background-color: #3E3E3E;
+}
+
+.task-card::-webkit-scrollbar-thumb {
+  background-color: rgb(102, 102, 102);
 }
 
 .task-card:hover {
@@ -18,7 +26,11 @@
   align-items: center;
 }
 
-.task-header>h4 {
+.task-header>a {
+  color: #00CAA9;
+  font-style: italic;
+  text-decoration: none;
+  font-weight: 520;
   margin-left: 6px;
 }
 

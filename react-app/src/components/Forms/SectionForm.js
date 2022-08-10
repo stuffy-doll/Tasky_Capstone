@@ -42,8 +42,8 @@ const SectionForm = ({ projectId }) => {
     <div className="add-section-field">
       {!showForm && (
         <div className="pre-section-form">
-          <button onClick={() => setShowForm(true)}>+</button>
           <p>Add Section</p>
+          <button onClick={() => setShowForm(true)}>+</button>
         </div>
       )}
       {showForm && (
