@@ -1,10 +1,16 @@
 const GET_TASKS = 'get/getTasks';
+const GET_USER_TASKS = 'get/getUserTasks';
 const POST_TASK = 'post/postTask';
 const UPDATE_TASK = 'update/updateTask';
 const DELETE_TASK = 'delete/deleteTask';
 
 const getT = (payload) => ({
   type: GET_TASKS,
+  payload
+});
+
+const getUT = (payload) => ({
+  type: GET_USER_TASKS,
   payload
 });
 
@@ -28,6 +34,19 @@ export const getTasks = (projectId) => async dispatch => {
   if (res.ok) {
     const data = await res.json();
     dispatch(getT(data));
+    return res;
+  } else {
+    return {
+      "Message": "Unsuccessful"
+    };
+  };
+};
+
+export const getUserTasks = (userId) => async dispatch => {
+  const res = await fetch(`/api/projects/tasks/user/${userId}`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getUT(data));
     return res;
   } else {
     return {
@@ -90,8 +109,12 @@ const taskReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
     case GET_TASKS:
+      newState = {}
       action.payload.tasks.forEach(task => newState[task.id] = task)
       return newState
+    case GET_USER_TASKS:
+      newState = {}
+      action.payload.uTasks.forEach(task => newState[task.id] = task)
     case POST_TASK:
       newState[action.payload.id] = action.payload;
       return newState

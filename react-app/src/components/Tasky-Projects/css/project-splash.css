@@ -1,0 +1,45 @@
+.tasks-due-today {
+  margin-left: 2%;
+  margin-top: 5%;
+  width: 70vw;
+  height: 60vh;
+}
+
+.task-card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 50vh;
+  width: 96%;
+  overflow: auto;
+}
+
+.task-splash-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  min-width: 175px;
+  max-width: 175px;
+  min-height: 20px;
+  max-height: 20px;
+  border: 1px solid #757575;
+  border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #00CDAA;
+}
+
+.task-splash-card>a {
+  margin-left: 8px;
+  font-style: italic;
+  color: #00CDAA;
+  text-decoration: none;
+}
