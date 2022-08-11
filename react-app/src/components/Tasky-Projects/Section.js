@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSections, deleteSection } from "../../store/sections";
+import { getUserTasks } from "../../store/tasks";
 import EditSectionForm from "../Forms/EditSectionForm";
 import SectionForm from "../Forms/SectionForm";
 import TaskForm from "../Forms/TaskForm";
@@ -29,15 +30,13 @@ const Section = ({ userId, projectId }) => {
             )}
             {!showForm && (
               <div className="section-card">
-                <div className="section-header" onClick={(e) => {
-                  e.stopPropagation();
-                  setShowForm(true)
-                }}>{section.name}</div>
+                <div className="section-header">{section.name}</div>
                 <TaskForm sectionId={section.id} />
                 <TaskList userId={userId} sectionId={section.id} projectId={projectId} />
                 <button id="trash" className="fa fa-trash-o" onClick={async (e) => {
                   e.preventDefault();
                   await dispatch(deleteSection(section.id))
+                  await dispatch(getUserTasks(userId))
                 }}></button>
               </div>
             )}

@@ -4,6 +4,7 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { getSections } from "../../store/sections";
 import { deleteTask, getTasks, updateTask } from "../../store/tasks";
 import './css/task-view.css'
+import NotFound from "./NotFound";
 
 const TaskView = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,8 @@ const TaskView = () => {
 
   const projectId = +useParams().projectId;
   const taskId = +useParams().taskId;
+
+  const userId = useSelector(state => state.session.user.id);
 
   const task = useSelector(state => Object.values(state.tasks)
     .filter(task => task.project_id === projectId))
@@ -114,11 +117,13 @@ const TaskView = () => {
 
   if (!task || !section || !project) {
     return (
-      <h1>Hello</h1>
+      <NotFound />
+    )
+  } else if (task.user_id !== userId) {
+    return (
+      <NotFound />
     )
   } else {
-
-    console.log(project);
     return (
       <div className="task-view">
         {!showTextForm && (

@@ -10,6 +10,7 @@ project_routes = Blueprint('projects', __name__)
 @project_routes.route('/<user_id>')
 def get_projects(user_id):
   query = Project.query.filter_by(user_id=user_id).all()
+  print("QUERY:: ", query)
   projects = [project.to_dict() for project in query]
   return { "projects": projects }
 
@@ -31,7 +32,6 @@ def post_project():
 def update_project(project_id):
   project = Project.query.get(project_id)
   data = request.json
-  print("DATA:: ", data)
   if data:
     project.name = data['name']
     project.color_label = data['color']
@@ -53,6 +53,12 @@ def get_tasks(project_id):
   query = Task.query.filter_by(project_id=project_id).all()
   tasks = [task.to_dict() for task in query]
   return { "tasks": tasks }
+
+@project_routes.route('/tasks/user/<user_id>')
+def get_tasks_by_user(user_id):
+  query = Task.query.filter_by(user_id=user_id).all()
+  tasks = [task.to_dict() for task in query]
+  return { "uTasks": tasks }
 
 @project_routes.route('/tasks/new', methods=['POST'])
 def post_task():

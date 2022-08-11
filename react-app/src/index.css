@@ -80,6 +80,7 @@ nav {
 }
 
 nav>div>a {
+  margin-left: 12px;
   text-decoration: none;
   font-weight: bold;
   color: white;
@@ -190,7 +191,7 @@ footer {
   border: none;
   height: 20px;
   width: auto;
-  background-color: #e69600;
+  background-color: #E69600;
   color: white;
   font-weight: bold;
   border-radius: 5px;

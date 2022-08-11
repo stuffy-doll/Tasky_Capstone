@@ -35,10 +35,6 @@ const LoginForm = () => {
 
   return (
     <div className="login-form-view">
-      <div className="tasky-brief">
-        <img src="https://i.imgur.com/iPeB24a.png" alt="tasky logo" />
-        <p className="tasky-description">Tasky is a clone of Todoist created by Luis Sanchez-Porras. Tasky lets users create projects and manage tasks within those projects.</p>
-      </div>
       <form className="login-form" onSubmit={onLogin}>
         <h2 className='login-header'>Login to Tasky</h2>
         <div className="form-errors">

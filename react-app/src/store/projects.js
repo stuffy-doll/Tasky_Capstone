@@ -90,6 +90,7 @@ const projectReducer = (state = {}, action) => {
   let newState = { ...state };
   switch (action.type) {
     case GET_PROJECTS:
+      newState = {}
       action.payload.projects.forEach(project => newState[project.id] = project)
       return newState
     case POST_PROJECT:

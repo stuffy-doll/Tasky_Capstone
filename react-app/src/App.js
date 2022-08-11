@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import ProjectList from './components/Tasky-Projects/ProjectList';
 import NotFound from './components/Tasky-Projects/NotFound';
+import Splash from './components/Splash/Splash';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,9 +37,9 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
+        <Route path='/' exact={true} >
+          <Splash />
+        </Route>
         <ProtectedRoute path='/projects' exact={false} >
           <ProjectList />
         </ProtectedRoute>
