@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getTasks } from "../../store/tasks";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './css/task-list.css'
 import TaskModal from "./TaskModal";
-import TaskView from "./TaskView";
+// import TaskView from "./TaskView";
 
 const TaskList = ({ sectionId, projectId }) => {
   const dispatch = useDispatch();

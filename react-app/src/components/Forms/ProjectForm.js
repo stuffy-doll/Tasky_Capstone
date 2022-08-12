@@ -49,16 +49,6 @@ const ProjectForm = ({ userId, showModal }) => {
     setFavorited(!favorited);
   };
 
-  const colors = [
-    'Brick Brown',
-    'Sea Green',
-    'Baby Peach',
-    'Cherry Plum',
-    'Pastel Yellow',
-    'Mint Blue',
-    'Bright Purple'
-  ];
-
   const colorsv2 = [
     {
       color: 'Brick Break',

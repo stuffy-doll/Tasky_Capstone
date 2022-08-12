@@ -1,22 +1,75 @@
+.tasky-splash-header {
+  text-align: center;
+  font-size: 60px;
+}
+
 .tasky-logo-splash>img {
   height: 200px;
   width: auto;
+  margin-left: 18vw;
 }
 
 .splash-contents {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  padding: 120px;
-  height: 54.9vh;
+  justify-content: space-around;
+  padding: 0px 20px 60px 60px;
+  height: 67vh;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .tasky-logo-splash>h1 {
+  text-align: center;
   margin-bottom: 12px;
 }
 
 .tasky-splash-description {
   margin-top: 50px;
+  margin-left: 10vw;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
+  max-width: 500px;
+}
+
+.slideshow {
+  margin: 0 auto;
+  margin-left: 10vw;
+  max-width: 900px;
+  max-height: 800px;
+  overflow: hidden;
+  border: 1px solid #757575;
+  border-radius: 8px;
+}
+
+.slider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slide {
+  display: inline-block;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.dots {
+  text-align: center;
+}
+
+.slideshow-dot {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+
+  background-color: #1f1f1f;
+}
+
+.slideshow-dot.active {
+  background-color: #00CDAA;
 }

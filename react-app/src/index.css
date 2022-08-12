@@ -67,6 +67,7 @@ nav {
 }
 
 .logout-button:hover {
+  cursor: pointer;
   background-color: #17e9c6;
 }
 
@@ -77,6 +78,11 @@ nav {
   color: white;
   font-weight: bold;
   border-radius: 5px;
+}
+
+.demo-login:hover {
+  cursor: pointer;
+  background-color: #17e9c6;
 }
 
 nav>div>a {
@@ -184,6 +190,7 @@ footer {
 }
 
 .add:hover {
+  cursor: pointer;
   background-color: #17e9c6;
 }
 

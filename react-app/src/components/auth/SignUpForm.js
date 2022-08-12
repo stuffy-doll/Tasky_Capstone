@@ -20,7 +20,7 @@ const SignUpForm = () => {
     } else {
       setMessage('')
     }
-  });
+  }, [password, repeatPassword]);
 
   const onSignUp = async (e) => {
     e.preventDefault();
