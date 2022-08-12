@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateTask, deleteTask } from "../../store/tasks";
+// import { useEffect, useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { updateTask, deleteTask } from "../../store/tasks";
 
-const TaskModal = ({ showModal, tasks }) => {
-  const dispatch = useDispatch();
+// const TaskModal = ({ showModal, tasks }) => {
+//   const dispatch = useDispatch();
 
   // const [showForm, setShowForm] = useState(false);
   // const [title, setTitle] = useState(task.title);
@@ -78,9 +78,9 @@ const TaskModal = ({ showModal, tasks }) => {
   //     )}
   //   </div>
   // )
-  return (
-    <h2>Hello</h2>
-  )
-}
+//   return (
+//     <h2>Hello</h2>
+//   )
+// }
 
-export default TaskModal;
+// export default TaskModal;

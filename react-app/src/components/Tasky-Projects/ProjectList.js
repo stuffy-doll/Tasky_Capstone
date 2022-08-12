@@ -9,31 +9,11 @@ import ProjectView from './ProjectView';
 import TaskView from './TaskView';
 import { getUserTasks } from '../../store/tasks';
 import ProjectSplash from './ProjectSplash';
+import Today from './Today';
 
 const ProjectList = () => {
   const dispatch = useDispatch();
 
-  const dateFormatter = (date) => {
-    if (date) {
-      if (date.length === 10) {
-        return date;
-      } else {
-        date = new Date(date);
-        const day = date.getDate();
-        const month = date.getMonth();
-        const year = date.getFullYear();
-        return `${year}-${month < 10 ? '0' + (month + 1) : month + 1}-${day < 10 ? '0' + day : day}`
-      };
-    } else {
-      return;
-    };
-  };
-
-  const today = dateFormatter(new Date(Date.now()))
-
-  const tasks = useSelector(state => Object.values(state.tasks))
-    .filter(task => dateFormatter(task.due_date?.slice(0, -4)) === today)
-    .filter(task => !task.is_complete);
   const userId = useSelector(state => state.session.user.id);
   const username = useSelector(state => state.session.user.username);
   const projects = useSelector(state => Object.values(state.projects));
@@ -82,15 +62,7 @@ const ProjectList = () => {
               <p>New Project</p>
               <button onClick={() => setShowModal(true)}>+</button>
             </div>
-            <div className='today-project-card'>
-              <div className='today-icon-link'>
-                <i id="calendar" className="fa fa-calendar" />
-                <Link className='project-link' to='/projects'>Today</Link>
-              </div>
-              <div className={`task-length-${tasks.length === 0 ? 'empty' : 'populated'}`}>
-                <p>{tasks.length}</p>
-              </div>
-            </div>
+            <Today />
             {favorites.length > 0 && (
               <div className='project-favorites'>
                 <h4 className='projects-header'>Favorites</h4>

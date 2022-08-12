@@ -45,6 +45,8 @@
 }
 
 .new-project>button:hover {
+  cursor: pointer;
+  background-color: #17e9c6;
   transform: rotate(90deg);
 }
 
