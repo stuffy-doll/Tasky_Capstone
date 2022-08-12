@@ -146,7 +146,7 @@ const TaskView = () => {
             <form className="edit-task-form" onSubmit={handleSubmit}>
               <div className="task-title-edit">
                 <input type="text" placeholder="Task Title" value={title || ''} onChange={(e) => setTitle(e.target.value)} />
-                <div className={title && (title.length > keystroke) ? 'danger' : 'primary'} >{title.length}/{keystroke}</div>
+                <div className={title.length === 0 || (title.length > keystroke) ? 'danger' : 'primary'} >{title.length}/{keystroke}</div>
               </div>
               <div className="edit-task-actions">
                 <button className="cancel" onClick={() => setShowTextForm(false)}>Cancel</button>

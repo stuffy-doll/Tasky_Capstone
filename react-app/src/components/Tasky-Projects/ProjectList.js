@@ -7,7 +7,7 @@ import ProjectForm from '../Forms/ProjectForm';
 import './css/project-view.css'
 import ProjectView from './ProjectView';
 import TaskView from './TaskView';
-import { getTasks, getUserTasks } from '../../store/tasks';
+import { getUserTasks } from '../../store/tasks';
 import ProjectSplash from './ProjectSplash';
 
 const ProjectList = () => {

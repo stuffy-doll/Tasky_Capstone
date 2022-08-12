@@ -42,18 +42,22 @@ const LoginForm = () => {
             <div className="error" key={ind}>{error}</div>
           ))}
         </div>
-        <div className="login-inputs">
+        <div>
+          <label>Email</label>
           <input
             name='email'
             type='text'
-            placeholder='Email'
+            placeholder='(Required)'
             value={email}
             onChange={updateEmail}
           />
+        </div>
+        <div>
+          <label>Password</label>
           <input
             name='password'
             type='password'
-            placeholder='Password'
+            placeholder='(Required)'
             value={password}
             onChange={updatePassword}
           />

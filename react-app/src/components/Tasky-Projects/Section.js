@@ -25,6 +25,7 @@ const Section = ({ userId, projectId }) => {
       <div className="section">
         {sections.map(section => (
           <div key={section.id}>
+            {/* Render Edit Form outside of map */}
             {showForm && (
               <EditSectionForm setShowForm={setShowForm} section={section} />
             )}
