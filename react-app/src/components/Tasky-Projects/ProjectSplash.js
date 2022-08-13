@@ -7,6 +7,20 @@ import './css/project-splash.css'
 const ProjectSplash = () => {
   const dispatch = useDispatch();
 
+  const determineDue = (date) => {
+    date = new Date(date?.slice(0, -4))
+    const today = new Date(Date.now());
+
+    if (today.getDate() > date.getDate()) {
+      return `${today.getDate() - date.getDate()} day(s) overdue.`
+    } else if (today.getDate() === date.getDate()) {
+      return `Due today.`
+    } else {
+      date = date.toString().split(' ');
+      return `Due ${date[0]}, ${date[1]} ${date[2]}`
+    }
+  }
+
   const dateFormatter = (date) => {
     if (date) {
       if (date.length === 10) {
@@ -29,6 +43,12 @@ const ProjectSplash = () => {
   const tasks = useSelector(state => Object.values(state.tasks))
     .filter(task => dateFormatter(task.due_date?.slice(0, -4)) === today)
     .filter(task => !task.is_complete);
+
+  const overdue = useSelector(state => Object.values(state.tasks))
+    .filter(task => determineDue(task.due_date).includes('overdue'))
+    .filter(task => !task.is_complete);
+
+  console.log("OVERDUE:: ", overdue)
 
   useEffect(() => {
     dispatch(getUserTasks(userId))
@@ -64,7 +84,38 @@ const ProjectSplash = () => {
                     }
                   }
                 }} />
-                <Link to={`/projects/${task.project_id}/task/${task.id}`}>{task.title}</Link>
+                <Link className="today-link" to={`/projects/${task.project_id}/task/${task.id}`}>{task.title}</Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {overdue.length > 0 && (
+        <div className="overdue-due-today">
+          <h2 className="overdue-splash-header">Overdue tasks!</h2>
+          <div className="overdue-card-wrapper">
+            {overdue.map((task, idx) => (
+              <div className="task-splash-card" key={idx}>
+                <input type="checkbox" checked={task.is_complete} onChange={async (e) => {
+                  e.preventDefault()
+                  const payload = {
+                    task_id: task.id
+                  };
+                  const response = await fetch(`/api/projects/tasks/complete`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                  });
+                  if (response.ok) {
+                    dispatch(getUserTasks(userId))
+                    return response.json()
+                  } else {
+                    return {
+                      "Message": "Unsuccessful"
+                    }
+                  }
+                }} />
+                <Link className="overdue-today-link" to={`/projects/${task.project_id}/task/${task.id}`}>{task.title}</Link>
               </div>
             ))}
           </div>

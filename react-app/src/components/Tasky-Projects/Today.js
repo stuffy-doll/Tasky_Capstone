@@ -20,10 +20,28 @@ const Today = () => {
     };
   };
 
+  const determineDue = (date) => {
+    date = new Date(date?.slice(0, -4))
+    const today = new Date(Date.now());
+
+    if (today.getDate() > date.getDate()) {
+      return `${today.getDate() - date.getDate()} day(s) overdue.`
+    } else if (today.getDate() === date.getDate()) {
+      return `Due today.`
+    } else {
+      date = date.toString().split(' ');
+      return `Due ${date[0]}, ${date[1]} ${date[2]}`
+    }
+  }
+
   const today = dateFormatter(new Date(Date.now()))
 
   const tasks = useSelector(state => Object.values(state.tasks))
     .filter(task => dateFormatter(task.due_date?.slice(0, -4)) === today)
+    .filter(task => !task.is_complete);
+
+  const overdue = useSelector(state => Object.values(state.tasks))
+    .filter(task => determineDue(task.due_date).includes('overdue'))
     .filter(task => !task.is_complete);
 
   return (
@@ -33,7 +51,7 @@ const Today = () => {
         <Link className='project-link' to='/projects'>Today</Link>
       </div>
       <div className={`task-length-${tasks.length === 0 ? 'empty' : 'populated'}`}>
-        <p>{tasks.length}</p>
+        <p>{tasks.length + overdue.length}</p>
       </div>
     </div>
   )
