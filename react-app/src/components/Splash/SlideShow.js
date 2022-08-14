@@ -21,13 +21,13 @@ const SlideShow = () => {
     return () => {
       resetTimeout();
     };
-  }, [index]);
+  }, [index, slides.length]);
 
   return (
     <div className="slideshow">
       <div className="slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
         {slides.map((slide, idx) => (
-          <img src={slide} className="slide" key={idx} />
+          <img src={slide} className="slide" key={idx} alt='slide' />
         ))}
       </div>
       <div className="dots">

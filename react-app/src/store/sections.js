@@ -26,7 +26,6 @@ const deleteS = (payload) => ({
 export const getSections = (projectId) => async dispatch => {
   const res = await fetch(`/api/projects/sections/${projectId}`);
   if (res.ok) {
-    console.log('1')
     const data = await res.json();
     dispatch(getS(data));
     return data;
@@ -92,7 +91,6 @@ const sectionReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_SECTIONS:
       action.payload.sections.forEach(section => newState[section.id] = section)
-      console.log("NEW STATE:: ", newState)
       return newState
     case POST_SECTION:
       newState[action.payload.id] = action.payload

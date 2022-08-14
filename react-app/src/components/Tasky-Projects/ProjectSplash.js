@@ -48,8 +48,6 @@ const ProjectSplash = () => {
     .filter(task => determineDue(task.due_date).includes('overdue'))
     .filter(task => !task.is_complete);
 
-  console.log("OVERDUE:: ", overdue)
-
   useEffect(() => {
     dispatch(getUserTasks(userId))
   }, [dispatch, userId])

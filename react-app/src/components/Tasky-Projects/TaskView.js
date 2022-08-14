@@ -49,18 +49,12 @@ const TaskView = () => {
   const [valErrors, setValErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
-  console.log("TITLE:: ", title);
-  console.log("DESCRIPTION:: ", description);
-  console.log("DUE DATE:: ", dueDate);
-
   useEffect(() => {
     dispatch(getTasks(projectId));
-    console.log("Use effect triggers")
     dispatch(getSections(projectId));
   }, [dispatch, projectId]);
 
   const handleEdit = (task) => {
-    console.log("HANDLE EDIT FORM TASK:: ", task);
     setTitle(task.title);
     setDescription(task.description);
     setDueDate(dateFormatter(task.due_date));
@@ -96,10 +90,6 @@ const TaskView = () => {
       };
     };
   };
-
-  console.log("PROJECT:: ", project)
-  console.log("TASK:: ", task)
-  console.log("SECTION:: ", section)
 
   const determineDue = (date) => {
     date = new Date(date.slice(0, -4))
