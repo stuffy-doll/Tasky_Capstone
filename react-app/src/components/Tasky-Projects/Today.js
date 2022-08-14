@@ -50,7 +50,7 @@ const Today = () => {
         <i id="calendar" className="fa fa-calendar" />
         <Link className='project-link' to='/projects'>Today</Link>
       </div>
-      <div className={`task-length-${tasks.length === 0 ? 'empty' : 'populated'}`}>
+      <div className={`task-length-${tasks.length === 0 && overdue.length === 0 ? 'empty' : 'populated'}`}>
         <p>{tasks.length + overdue.length}</p>
       </div>
     </div>

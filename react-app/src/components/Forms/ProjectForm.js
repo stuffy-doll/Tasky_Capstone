@@ -95,16 +95,8 @@ const ProjectForm = ({ userId, showModal }) => {
       code: '#CE9EFF'
     },
     {
-      color: 'Kobold Skin',
-      code: '#3D314A'
-    },
-    {
       color: 'Perfect Sky',
       code: '#D7B9D5'
-    },
-    {
-      color: 'River Medicine',
-      code: '#313628'
     },
     {
       color: 'Dry Bones',

@@ -5,6 +5,7 @@
   align-items: center;
   margin-top: 8px;
   margin-bottom: 8px;
+  transition: ease .5s
 }
 
 .post-task-form {
@@ -12,7 +13,8 @@
   border-radius: 8px;
   padding: 8px;
   margin: 6px;
-  overflow: auto
+  overflow: auto;
+  transition: ease .5s
 }
 
 .task-td-edit {

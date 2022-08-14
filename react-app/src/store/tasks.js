@@ -115,6 +115,7 @@ const taskReducer = (state = {}, action) => {
     case GET_USER_TASKS:
       newState = {}
       action.payload.uTasks.forEach(task => newState[task.id] = task)
+      return newState
     case POST_TASK:
       newState[action.payload.id] = action.payload;
       return newState

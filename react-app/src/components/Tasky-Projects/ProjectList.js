@@ -17,16 +17,15 @@ const ProjectList = () => {
   const userId = useSelector(state => state.session.user.id);
   const username = useSelector(state => state.session.user.username);
   const projects = useSelector(state => Object.values(state.projects));
-  console.log(userId);
   const favorites = projects.filter(project => project.is_favorite);
 
   const [value, setValue] = useState('Loading')
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     let isMounted = true;
-    await dispatch(getUserTasks(userId))
-    await dispatch(getProjects(userId))
+    dispatch(getUserTasks(userId))
+    dispatch(getProjects(userId))
       .then(() => {
         if (isMounted) {
           setValue('Done');
@@ -46,8 +45,6 @@ const ProjectList = () => {
     `Shoutouts to Pihort!`,
     `${username}! You're here!`
   ]
-
-  console.log(value);
 
   return (
     <>

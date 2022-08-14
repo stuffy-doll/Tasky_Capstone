@@ -69,20 +69,12 @@ const ProjectEditModal = ({ project, setShowEdit }) => {
       code: '#CE9EFF'
     },
     {
-      color: 'Kobold Skin',
-      code: '#3D314A'
-    },
-    {
       color: 'Reserved Orange',
       code: '#D36135'
     },
     {
       color: 'Perfect Sky',
       code: '#D7B9D5'
-    },
-    {
-      color: 'River Medicine',
-      code: '#313628'
     },
     {
       color: 'Crawling Green',
