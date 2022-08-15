@@ -53,6 +53,9 @@
   font-style: italic;
   color: #00CDAA;
   text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .overdue-due-today {
