@@ -152,3 +152,12 @@ def delete_section(section_id):
   db.session.delete(section)
   db.session.commit()
   return section.to_dict()
+
+# COMMENT ROUTES
+
+@project_routes.route('/comments/<user_id>')
+def get_comments(user_id):
+  query = Comment.query.filter_by(user_id=user_id).all()
+  comments = [comment.to_dict() for comment in query]
+  print("COMMENTS:: ", comments)
+  return { "comments": comments }

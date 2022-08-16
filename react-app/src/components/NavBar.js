@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { login } from '../store/session';
 import LogoutButton from './auth/LogoutButton';
+import Search from './Search/Search';
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -32,13 +33,18 @@ const NavBar = () => {
       )
       }
       {userId && (
-        <nav className='auth-user-nav'>
-          <div></div>
-          <img className='tasky-logo' src="https://i.imgur.com/6AsCOz2.png" alt="Tasky Logo" />
-          <div>
-            <LogoutButton />
+        <div className='user-nav'>
+          <div className='search-nav'>
+            <Search />
           </div>
-        </nav>
+          <nav className='auth-user-nav'>
+            <div></div>
+            <img className='tasky-logo' src="https://i.imgur.com/6AsCOz2.png" alt="Tasky Logo" />
+            <div>
+              <LogoutButton />
+            </div>
+          </nav>
+        </div>
       )}
     </div>
   );

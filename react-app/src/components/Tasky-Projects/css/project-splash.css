@@ -19,8 +19,7 @@
 
 .task-splash-card {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   padding: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -29,7 +28,7 @@
   min-width: 175px;
   max-width: 175px;
   min-height: 20px;
-  max-height: 20px;
+  max-height: 80px;
   border: 1px solid #757575;
   border-radius: 5px;
   overflow: hidden;
@@ -37,6 +36,12 @@
   text-overflow: ellipsis;
   color: #00CDAA;
   transition: .4s;
+}
+
+.check-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .task-splash-card:hover {

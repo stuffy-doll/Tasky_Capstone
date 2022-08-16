@@ -21,6 +21,11 @@ const ProjectSplash = () => {
     }
   }
 
+  const dateMaker = (date) => {
+    date = date.toString().split(' ');
+    return `Due ${date[0]} ${date[1]} ${date[2]}`
+  }
+
   const dateFormatter = (date) => {
     if (date) {
       if (date.length === 10) {
@@ -63,26 +68,29 @@ const ProjectSplash = () => {
           <div className="task-card-wrapper">
             {tasks.map((task, idx) => (
               <div className="task-splash-card" key={idx}>
-                <input type="checkbox" checked={task.is_complete} onChange={async (e) => {
-                  e.preventDefault();
-                  const payload = {
-                    task_id: task.id
-                  };
-                  const response = await fetch(`/api/projects/tasks/complete`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                  });
-                  if (response.ok) {
-                    dispatch(getUserTasks(userId))
-                    return response.json()
-                  } else {
-                    return {
-                      "Message": "Unsuccessful"
+                <div className="check-title">
+                  <input type="checkbox" checked={task.is_complete} onChange={async (e) => {
+                    e.preventDefault();
+                    const payload = {
+                      task_id: task.id
+                    };
+                    const response = await fetch(`/api/projects/tasks/complete`, {
+                      method: 'PUT',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(payload)
+                    });
+                    if (response.ok) {
+                      dispatch(getUserTasks(userId))
+                      return response.json()
+                    } else {
+                      return {
+                        "Message": "Unsuccessful"
+                      }
                     }
-                  }
-                }} />
-                <Link className="today-link" to={`/projects/${task.project_id}/task/${task.id}`}>{task.title}</Link>
+                  }} />
+                  <Link className="today-link" to={`/projects/${task.project_id}/task/${task.id}`}>{task.title}</Link>
+                </div>
+                <p className="due">{dateMaker(task.due_date)}</p>
               </div>
             ))}
           </div>
@@ -94,26 +102,29 @@ const ProjectSplash = () => {
           <div className="overdue-card-wrapper">
             {overdue.map((task, idx) => (
               <div className="task-splash-card" key={idx}>
-                <input type="checkbox" checked={task.is_complete} onChange={async (e) => {
-                  e.preventDefault()
-                  const payload = {
-                    task_id: task.id
-                  };
-                  const response = await fetch(`/api/projects/tasks/complete`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                  });
-                  if (response.ok) {
-                    dispatch(getUserTasks(userId))
-                    return response.json()
-                  } else {
-                    return {
-                      "Message": "Unsuccessful"
+                <div className="check-title">
+                  <input type="checkbox" checked={task.is_complete} onChange={async (e) => {
+                    e.preventDefault()
+                    const payload = {
+                      task_id: task.id
+                    };
+                    const response = await fetch(`/api/projects/tasks/complete`, {
+                      method: 'PUT',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(payload)
+                    });
+                    if (response.ok) {
+                      dispatch(getUserTasks(userId))
+                      return response.json()
+                    } else {
+                      return {
+                        "Message": "Unsuccessful"
+                      }
                     }
-                  }
-                }} />
-                <Link className="overdue-today-link" to={`/projects/${task.project_id}/task/${task.id}`}>{task.title}</Link>
+                  }} />
+                  <Link className="overdue-today-link" to={`/projects/${task.project_id}/task/${task.id}`}>{task.title}</Link>
+                </div>
+                <p className="overdue">{dateMaker(task.due_date)}</p>
               </div>
             ))}
           </div>
