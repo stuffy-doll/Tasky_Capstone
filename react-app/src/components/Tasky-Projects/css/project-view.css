@@ -148,6 +148,26 @@
   background-color: #4e4e4e;
 }
 
+#comment {
+  background: none;
+  color: darkgray;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px;
+  margin-right: 2px;
+}
+
+#comment:hover {
+  cursor: pointer;
+  background-color: #4e4e4e;
+}
+
+.coming-soon {
+  font-size: 12px;
+  font-style: italic;
+  color: #757575;
+}
+
 .section {
   display: flex;
   box-sizing: border-box;

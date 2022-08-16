@@ -10,6 +10,7 @@ import TaskView from './TaskView';
 import { getUserTasks } from '../../store/tasks';
 import ProjectSplash from './ProjectSplash';
 import Today from './Today';
+import { getComments } from '../../store/comments';
 
 const ProjectList = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const ProjectList = () => {
   const username = useSelector(state => state.session.user.username);
   const projects = useSelector(state => Object.values(state.projects));
   const favorites = projects.filter(project => project.is_favorite);
+  const comments = useSelector(state => Object.values(state.comments));
 
   const [value, setValue] = useState('Loading')
   const [showModal, setShowModal] = useState(false);
@@ -26,6 +28,7 @@ const ProjectList = () => {
     let isMounted = true;
     dispatch(getUserTasks(userId))
     dispatch(getProjects(userId))
+    dispatch(getComments(userId))
       .then(() => {
         if (isMounted) {
           setValue('Done');
@@ -87,7 +90,7 @@ const ProjectList = () => {
               </div>
             </ProtectedRoute>
             <ProtectedRoute path='/projects/:projectId' exact={true}>
-              <ProjectView userId={userId} projects={projects} />
+              <ProjectView userId={userId} projects={projects} comments={comments} />
             </ProtectedRoute>
             <ProtectedRoute path='/projects/:projectId/task/:taskId' exact={true}>
               <TaskView />
