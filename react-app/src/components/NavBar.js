@@ -11,42 +11,45 @@ const NavBar = () => {
   const userId = useSelector(state => state.session.user?.id);
 
   return (
-    <div className='nav-bar'>
-      {!userId && (
-        <div className='unauth-user-nav'>
-          <nav className='unauth-nav'>
-            <div className='login-signup'>
-              <NavLink to='/login' exact={true} activeClassName='active'>
-                Login
-              </NavLink>
-              <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                Sign Up
-              </NavLink>
-            </div>
-            <img className='tasky-logo' src="https://i.imgur.com/6AsCOz2.png" alt="Tasky Logo" />
-            <button className="demo-login" onClick={async (e) => {
-              e.preventDefault();
-              await dispatch(login('demo@aa.io', 'password'))
-            }}>Demo Login</button>
-          </nav>
-        </div>
-      )
-      }
-      {userId && (
-        <div className='user-nav'>
-          <div className='search-nav'>
-            <Search />
+    <>
+      <div className='nav-bar'>
+        {!userId && (
+          <div className='unauth-user-nav'>
+            <nav className='unauth-nav'>
+              <div className='login-signup'>
+                <NavLink to='/login' exact={true} activeClassName='active'>
+                  Login
+                </NavLink>
+                <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                  Sign Up
+                </NavLink>
+              </div>
+              <img className='tasky-logo' src="https://i.imgur.com/6AsCOz2.png" alt="Tasky Logo" />
+              <button className="demo-login" onClick={async (e) => {
+                e.preventDefault();
+                await dispatch(login('demo@aa.io', 'password'))
+              }}>Demo Login</button>
+            </nav>
           </div>
-          <nav className='auth-user-nav'>
-            <div></div>
-            <img className='tasky-logo' src="https://i.imgur.com/6AsCOz2.png" alt="Tasky Logo" />
-            <div>
-              <LogoutButton />
+        )
+        }
+        {userId && (
+          <>
+            <div className='user-nav'>
+              <nav className='auth-user-nav'>
+                <div>
+                  <LogoutButton />
+                </div>
+                <img className='tasky-logo' src="https://i.imgur.com/6AsCOz2.png" alt="Tasky Logo" />
+              </nav>
             </div>
-          </nav>
-        </div>
-      )}
-    </div>
+            <div className='search-nav'>
+              <Search />
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 }
 

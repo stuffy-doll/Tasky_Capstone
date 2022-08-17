@@ -11,6 +11,7 @@ import { getUserTasks } from '../../store/tasks';
 import ProjectSplash from './ProjectSplash';
 import Today from './Today';
 import { getComments } from '../../store/comments';
+import Search from '../Search/Search';
 
 const ProjectList = () => {
   const dispatch = useDispatch();
