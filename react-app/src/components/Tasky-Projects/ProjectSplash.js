@@ -43,6 +43,7 @@ const ProjectSplash = () => {
   };
 
   const today = dateFormatter(new Date(Date.now()))
+  console.log("TODAY", today)
 
   const userId = useSelector(state => state.session.user.id);
   const tasks = useSelector(state => Object.values(state.tasks))
@@ -62,6 +63,7 @@ const ProjectSplash = () => {
       {tasks.length === 0 && (
         <h2>No tasks due today! You're on track! </h2>
       )}
+      <p className="clock">Today is {new Date(Date.now()).toString().slice(0, -42)}</p>
       {tasks.length > 0 && (
         <div className="tasks-due-today">
           <h2 className="project-splash-header">Tasks that need your attention today!</h2>
