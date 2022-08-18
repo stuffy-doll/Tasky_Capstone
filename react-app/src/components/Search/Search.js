@@ -27,6 +27,29 @@ const Search = () => {
     }
   }
 
+  const dateFormatter = (date) => {
+    if (date) {
+      if (date.length === 10) {
+        return date;
+      } else if (date.length === 29) {
+        date = new Date(date.slice(0, -4));
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        return `${year}-${month < 10 ? '0' + (month + 1) : month + 1}-${day < 10 ? '0' + day : day}`
+      }
+      else {
+        date = new Date(date);
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        return `${year}-${month < 10 ? '0' + (month + 1) : month + 1}-${day < 10 ? '0' + day : day}`
+      };
+    } else {
+      return;
+    };
+  };
+
   const userId = useSelector(state => state.session.user.id);
   const tasks = useSelector(state => Object.values(state.tasks));
   const projects = useSelector(state => Object.values(state.projects));
@@ -40,12 +63,22 @@ const Search = () => {
     dispatch(getUserTasks(userId))
   }, [dispatch, userId])
 
+  const today = dateFormatter(new Date(Date.now()))
+
   const filterTasks = (e) => {
     if (e.target.value) {
       results = tasks.filter(task =>
         (!task.is_complete && task.title.toLowerCase().includes(e.target.value.toLowerCase()))
       );
     };
+    if (e.target.value === '#TODAY'.toLowerCase()) {
+      results = tasks.filter(task =>
+        dateFormatter(task.due_date) === today)
+    }
+    if (e.target.value === '#OVERDUE'.toLowerCase()) {
+      results = tasks.filter(task =>
+        (!task.is_complete && determineDue(task.due_date).includes('overdue')))
+    }
     setSearch(results)
   }
 

@@ -88,3 +88,7 @@
   color: #DE3C4B;
   text-decoration: none;
 }
+
+.clock {
+  font-style: italic;
+}

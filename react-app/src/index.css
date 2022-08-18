@@ -144,6 +144,12 @@ nav {
   transition: .4s;
 }
 
+.result-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .in-project {
   display: flex;
   flex-direction: row;
