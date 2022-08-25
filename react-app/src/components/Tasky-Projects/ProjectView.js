@@ -28,7 +28,7 @@ const ProjectView = ({ userId, projects, comments }) => {
             <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />
             <h2 className="project-heading">{project?.name}</h2>
             <button id="pencil" className="fa fa-pencil-square-o" onClick={() => setShowEdit(true)}></button>
-            {!project.is_default && (
+            {project.is_default === false && (
               <button id="trash" className="fa fa-trash-o" onClick={() => setShowDelete(true)}></button>
             )}
             <button id="comment" className="fa fa-comments" disabled={true} onClick={() => setShowComments(true)}></button>

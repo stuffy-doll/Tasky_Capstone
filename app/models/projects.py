@@ -22,7 +22,8 @@ class Project(db.Model):
       "user_id": self.user_id,
       "name": self.name,
       "color_label": self.color_label,
-      "is_favorite": self.is_favorite
+      "is_favorite": self.is_favorite,
+      "is_default": self.is_default,
     }
 
 
