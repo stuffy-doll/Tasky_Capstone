@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { useState } from "react";
 import { useParams } from "react-router-dom"
 import CommentsModal from "./CommentsModal";
@@ -22,13 +23,13 @@ const ProjectView = ({ userId, projects, comments }) => {
       <>
         {showEdit && <ProjectEditModal project={project} setShowEdit={setShowEdit} />}
         {showDelete && <ProjectDeleteModal project={project} setShowDelete={setShowDelete} />}
-        {showComments && <CommentsModal project={project} comments={comments} setShowComments={setShowComments} />}
+        {showComments && createPortal(<CommentsModal project={project} comments={comments} setShowComments={setShowComments} />, document.getElementsByClassName('project-view'))}
         <div className="project-view">
           <div className="project-header-bar">
             <div id={`color-label-${project.color_label.split(' ')[0].toLowerCase()}`} />
             <h2 className="project-heading">{project?.name}</h2>
             <button id="pencil" className="fa fa-pencil-square-o" onClick={() => setShowEdit(true)}></button>
-            {project.is_default === false && (
+            {!project.is_default && (
               <button id="trash" className="fa fa-trash-o" onClick={() => setShowDelete(true)}></button>
             )}
             <button id="comment" className="fa fa-comments" disabled={true} onClick={() => setShowComments(true)}></button>
