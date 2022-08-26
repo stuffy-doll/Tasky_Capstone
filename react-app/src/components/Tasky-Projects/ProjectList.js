@@ -11,12 +11,51 @@ import { getUserTasks } from '../../store/tasks';
 import ProjectSplash from './ProjectSplash';
 import Today from './Today';
 import { getComments } from '../../store/comments';
-import Search from '../Search/Search';
 
 const ProjectList = () => {
   const dispatch = useDispatch();
 
+  const dateFormatter = (date) => {
+    if (date) {
+      if (date.length === 10) {
+        return date;
+      } else {
+        date = new Date(date);
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        return `${year}-${month < 10 ? '0' + (month + 1) : month + 1}-${day < 10 ? '0' + day : day}`
+      };
+    } else {
+      return;
+    };
+  };
+
+  const determineDue = (date) => {
+    date = new Date(date?.slice(0, -4))
+    const today = new Date(Date.now());
+
+    if (today.getDate() > date.getDate()) {
+      return `${today.getDate() - date.getDate()} day(s) overdue.`
+    } else if (today.getDate() === date.getDate()) {
+      return `Due today.`
+    } else {
+      date = date.toString().split(' ');
+      return `Due ${date[0]}, ${date[1]} ${date[2]}`
+    }
+  }
+
+  const today = dateFormatter(new Date(Date.now()))
   const userId = useSelector(state => state.session.user.id);
+
+  const tasks = useSelector(state => Object.values(state.tasks))
+    .filter(task => task.user_id === userId && dateFormatter(task.due_date?.slice(0, -4)) === today)
+    .filter(task => !task.is_complete);
+
+  const overdue = useSelector(state => Object.values(state.tasks))
+    .filter(task => task.user_id === userId && determineDue(task.due_date).includes('overdue'))
+    .filter(task => !task.is_complete);
+
   const username = useSelector(state => state.session.user.username);
   const projects = useSelector(state => Object.values(state.projects));
   const favorites = projects.filter(project => project.is_favorite);
@@ -63,7 +102,7 @@ const ProjectList = () => {
               <p>New Project</p>
               <button onClick={() => setShowModal(true)}>+</button>
             </div>
-            <Today />
+            <Today tasks={tasks} overdue={overdue} />
             {favorites.length > 0 && (
               <div className='project-favorites'>
                 <h4 className='projects-header'>Favorites</h4>
