@@ -1,7 +1,5 @@
-from app.models import db, Project, Section, Task, Comment
+from app.models import (db, Project, Section, Task, Comment, Label)
 from datetime import date
-
-from app.models.projects import Label
 
 def seed_projects():
   demo_x = Project(
