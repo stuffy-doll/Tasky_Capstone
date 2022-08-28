@@ -1,6 +1,11 @@
 from .db import db
 from datetime import date, timedelta
 
+tasks_labels = db.Table('tasks_labels',
+  db.Model.metadata,
+  db.Column('tasks', db.Integer, db.ForeignKey('tasks.id'), primary_key=True),
+  db.Column('labels', db.Integer, db.ForeignKey('labels.id'), primary_key=True))
+
 class Project(db.Model):
   __tablename__ = 'projects'
 
@@ -63,6 +68,7 @@ class Task(db.Model):
   user = db.relationship('User', back_populates='tasks')
   project = db.relationship('Project', back_populates='tasks')
   section = db.relationship('Section', back_populates='tasks')
+  task_labels = db.relationship('Label', secondary=tasks_labels, back_populates='label_tasks')
 
   def to_dict(self):
     return {
@@ -75,6 +81,7 @@ class Task(db.Model):
       "due_date": self.due_date,
       "is_complete": self.is_complete
     }
+
 
 class Comment(db.Model):
   __tablename__ = 'comments'
@@ -93,4 +100,18 @@ class Comment(db.Model):
       "user_id": self.user_id,
       "project_id": self.project_id,
       "content": self.content
+    }
+
+class Label(db.Model):
+  __tablename__ = 'labels'
+
+  id = db.Column(db.Integer, primary_key=True)
+  label = db.Column(db.String(20), nullable=False)
+
+  label_tasks = db.relationship('Task', secondary=tasks_labels, back_populates='task_labels')
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "label": self.label
     }
