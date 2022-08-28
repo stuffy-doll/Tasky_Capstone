@@ -1,4 +1,4 @@
-from app.models import db, Project, Section, Task, Comment
+from app.models import (db, Project, Section, Task, Comment, Label)
 from datetime import date
 
 def seed_projects():
@@ -63,6 +63,15 @@ def seed_comments():
   )
 
   db.session.add(demo_c_x)
+
+  db.session.commit()
+
+def seed_labels():
+  demo_l_x = Label(
+    user_id=1, label='work'
+  )
+
+  db.session.add(demo_l_x)
 
   db.session.commit()
 

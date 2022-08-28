@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     sections = db.relationship('Section', back_populates='user', cascade='all, delete')
     tasks = db.relationship('Task', back_populates='user', cascade='all, delete')
     comments = db.relationship('Comment', back_populates='user', cascade='all, delete')
+    labels = db.relationship('Label', back_populates='user', cascade='all,delete')
 
     @property
     def password(self):

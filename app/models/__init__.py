@@ -4,5 +4,6 @@ from .projects import (
   Project,
   Section,
   Task,
-  Comment
+  Comment,
+  Label
 )
