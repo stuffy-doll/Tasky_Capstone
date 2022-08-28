@@ -1,6 +1,8 @@
 from app.models import db, Project, Section, Task, Comment
 from datetime import date
 
+from app.models.projects import Label
+
 def seed_projects():
   demo_x = Project(
     user_id=1, name='Your Tasks', color_label='Default Coal', is_favorite=False, is_default=True
@@ -63,6 +65,15 @@ def seed_comments():
   )
 
   db.session.add(demo_c_x)
+
+  db.session.commit()
+
+def seed_labels():
+  demo_l_x = Label(
+    user_id=1, label='work'
+  )
+
+  db.session.add(demo_l_x)
 
   db.session.commit()
 

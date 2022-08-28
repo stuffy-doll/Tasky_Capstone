@@ -106,8 +106,10 @@ class Label(db.Model):
   __tablename__ = 'labels'
 
   id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   label = db.Column(db.String(20), nullable=False)
 
+  user = db.relationship('User', back_populates='labels')
   label_tasks = db.relationship('Task', secondary=tasks_labels, back_populates='task_labels')
 
   def to_dict(self):
