@@ -166,7 +166,17 @@ def get_comments(user_id):
 @project_routes.route('/labels/<user_id>')
 def get_labels(user_id):
   query = Label.query.filter_by(user_id=user_id).all()
-  t_query = Task.query.filter_by(id=1).one()
-  print("TASK QUERY:: ", t_query.task_labels)
   labels = [label.to_dict() for label in query]
   return { "labels": labels }
+
+@project_routes.route('/labels/new', methods=['POST'])
+def post_label():
+  data = request.json
+  if data:
+    label = Label(
+      user_id=data['user_id'],
+      label=data['label']
+    )
+    db.session.add(label)
+    db.session.commit()
+    return label.to_dict()
