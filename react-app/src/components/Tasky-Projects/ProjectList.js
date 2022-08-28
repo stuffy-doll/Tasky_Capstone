@@ -11,6 +11,7 @@ import { getUserTasks } from '../../store/tasks';
 import ProjectSplash from './ProjectSplash';
 import Today from './Today';
 import { getComments } from '../../store/comments';
+import { getLabels } from '../../store/labels';
 
 const ProjectList = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ const ProjectList = () => {
     dispatch(getUserTasks(userId))
     dispatch(getProjects(userId))
     dispatch(getComments(userId))
+    dispatch(getLabels(userId))
       .then(() => {
         if (isMounted) {
           setValue('Done');

@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.models import db, Project, Section, Task, Comment
+from app.models import (db, Project, Section, Task, Comment, Label)
 from datetime import date
 
 project_routes = Blueprint('projects', __name__)
@@ -159,5 +159,12 @@ def delete_section(section_id):
 def get_comments(user_id):
   query = Comment.query.filter_by(user_id=user_id).all()
   comments = [comment.to_dict() for comment in query]
-  print("COMMENTS:: ", comments)
   return { "comments": comments }
+
+# LABEL ROUTES
+
+@project_routes.route('/labels/<user_id>')
+def get_labels(user_id):
+  query = Label.query.filter_by(user_id=user_id).all()
+  labels = [label.to_dict() for label in query]
+  return { "labels": labels }
