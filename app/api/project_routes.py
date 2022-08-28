@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.models import (db, Project, Section, Task, Comment, Label)
+from app.models import (db, User, Project, Section, Task, Comment, Label)
 from datetime import date
 
 project_routes = Blueprint('projects', __name__)
@@ -166,5 +166,7 @@ def get_comments(user_id):
 @project_routes.route('/labels/<user_id>')
 def get_labels(user_id):
   query = Label.query.filter_by(user_id=user_id).all()
+  t_query = Task.query.filter_by(id=1).one()
+  print("TASK QUERY:: ", t_query.task_labels)
   labels = [label.to_dict() for label in query]
   return { "labels": labels }

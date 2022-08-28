@@ -74,6 +74,19 @@
 .today-project-card {
   display: flex;
   flex-direction: row;
+  margin-bottom: 8px;
+  padding: 6px;
+  align-items: center;
+  height: 20px;
+  max-height: 20px;
+  border-radius: 8px;
+  transition: .4s ease;
+  justify-content: space-between;
+}
+
+.labels-card {
+  display: flex;
+  flex-direction: row;
   margin-bottom: 20px;
   padding: 6px;
   align-items: center;
@@ -102,8 +115,22 @@
   box-shadow: 3px 3px 4px #1F1F1F;
 }
 
+.labels-icon-link>a {
+  margin-top: 4px;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.labels-card:hover {
+  box-shadow: 3px 3px 4px #1F1F1F;
+}
+
 #calendar {
   color: #00CAA9
+}
+
+#label {
+  color: #D36135
 }
 
 .getting-started {

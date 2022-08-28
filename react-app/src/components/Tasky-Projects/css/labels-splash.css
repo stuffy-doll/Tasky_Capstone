@@ -1,0 +1,17 @@
+.labels-heading>button {
+  height: 24px;
+  width: 24px;
+  border-radius: 8px;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  background-color: #00CAA9;
+  color: #3E3E3E;
+  transition: transform .7s ease-in-out;
+}
+
+.labels-heading>button:hover {
+  cursor: pointer;
+  background-color: #17e9c6;
+  transform: rotate(90deg);
+}
