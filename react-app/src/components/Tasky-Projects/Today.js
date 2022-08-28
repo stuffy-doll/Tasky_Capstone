@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Today = ({ tasks, overdue }) => {
-  // const dispatch = useDispatch();
-
   return (
     <div className='today-project-card'>
       <div className='today-icon-link'>

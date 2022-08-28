@@ -11,6 +11,9 @@ import { getUserTasks } from '../../store/tasks';
 import ProjectSplash from './ProjectSplash';
 import Today from './Today';
 import { getComments } from '../../store/comments';
+import { getLabels } from '../../store/labels';
+import Labels from './Labels';
+import LabelsSplash from './LabelsSplash';
 
 const ProjectList = () => {
   const dispatch = useDispatch();
@@ -60,6 +63,7 @@ const ProjectList = () => {
   const projects = useSelector(state => Object.values(state.projects));
   const favorites = projects.filter(project => project.is_favorite);
   const comments = useSelector(state => Object.values(state.comments));
+  const labels = useSelector(state => Object.values(state.labels));
 
   const [value, setValue] = useState('Loading')
   const [showModal, setShowModal] = useState(false);
@@ -69,6 +73,7 @@ const ProjectList = () => {
     dispatch(getUserTasks(userId))
     dispatch(getProjects(userId))
     dispatch(getComments(userId))
+    dispatch(getLabels(userId))
       .then(() => {
         if (isMounted) {
           setValue('Done');
@@ -103,6 +108,7 @@ const ProjectList = () => {
               <button onClick={() => setShowModal(true)}>+</button>
             </div>
             <Today tasks={tasks} overdue={overdue} />
+            <Labels />
             {favorites.length > 0 && (
               <div className='project-favorites'>
                 <h4 className='projects-header'>Favorites</h4>
@@ -128,6 +134,9 @@ const ProjectList = () => {
                 <h1 className='greeting'>{greetings[Math.floor(Math.random() * greetings.length)]}</h1>
                 <ProjectSplash />
               </div>
+            </ProtectedRoute>
+            <ProtectedRoute path='/projects/labels' exact={true}>
+              <LabelsSplash userId={userId} projects={projects} labels={labels} />
             </ProtectedRoute>
             <ProtectedRoute path='/projects/:projectId' exact={true}>
               <ProjectView userId={userId} projects={projects} comments={comments} />
