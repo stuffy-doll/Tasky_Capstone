@@ -48,7 +48,7 @@ const TaskList = ({ sectionId, projectId }) => {
         )}
         {unfinishedTasks.map(task => (
           <>
-            <div className="task-card" key={task.id}>
+            <div className="task-card" draggable key={task.id}>
               <div className="task-header">
                 <input type="checkbox" disabled={false} onChange={async (e) => {
                   e.preventDefault()
