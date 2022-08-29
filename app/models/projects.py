@@ -108,6 +108,7 @@ class Label(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
   label = db.Column(db.String(20), nullable=False)
+  color_label = db.Column(db.String, nullable=False)
 
   user = db.relationship('User', back_populates='labels')
   label_tasks = db.relationship('Task', secondary=tasks_labels, back_populates='task_labels')
@@ -115,5 +116,6 @@ class Label(db.Model):
   def to_dict(self):
     return {
       "id": self.id,
-      "label": self.label
+      "label": self.label,
+      "color_label": self.color_label
     }

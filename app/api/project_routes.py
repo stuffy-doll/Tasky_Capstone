@@ -175,7 +175,8 @@ def post_label():
   if data:
     label = Label(
       user_id=data['user_id'],
-      label=data['label']
+      label=data['label'],
+      color_label=data['color_label']
     )
     db.session.add(label)
     db.session.commit()
