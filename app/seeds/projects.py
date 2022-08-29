@@ -68,7 +68,7 @@ def seed_comments():
 
 def seed_labels():
   demo_l_x = Label(
-    user_id=1, label='work'
+    user_id=1, label='work', color_label='Baby Peach'
   )
 
   db.session.add(demo_l_x)
