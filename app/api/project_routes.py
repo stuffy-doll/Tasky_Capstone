@@ -60,6 +60,14 @@ def get_tasks_by_user(user_id):
   tasks = [task.to_dict() for task in query]
   return { "uTasks": tasks }
 
+@project_routes.route('/tasks/labels/<task_id>')
+def get_task_labels(task_id):
+  task = Task.query.get(task_id)
+  labels = [label.to_dict() for label in task.task_labels]
+  return {
+    "labels": labels
+  };
+
 @project_routes.route('/tasks/new', methods=['POST'])
 def post_task():
   data = request.json
