@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { postLabel } from "../../store/labels";
 import './css/labels-splash.css'
 import ProtectedRoute from "../auth/ProtectedRoute";
-import LabelView from "./LabelView";
 
 const LabelsSplash = ({ userId, projects, labels }) => {
   const dispatch = useDispatch();
@@ -138,14 +137,11 @@ const LabelsSplash = ({ userId, projects, labels }) => {
           <div key={idx} className="label-container">
             <div className="label-details">
               <div id={`color-label-${label.color_label.split(' ')[0].toLowerCase()}`} />
-              <Link className="label-link" to={`/projects/labels/${label.label}`}>{label.label}</Link>
+              <Link className="label-link" to={`/projects/labels/${label.id}`}>{label.label}</Link>
             </div>
             <div className="label-actions">
               {/* <button className="add-label-task">+</button> */}
             </div>
-            <ProtectedRoute path='/projects/labels/:labelLabel' exact={true} >
-              <LabelView labelId={label.id} />
-            </ProtectedRoute>
           </div>
         ))}
       </div>

@@ -10,7 +10,6 @@ project_routes = Blueprint('projects', __name__)
 @project_routes.route('/<user_id>')
 def get_projects(user_id):
   query = Project.query.filter_by(user_id=user_id).all()
-  print("QUERY:: ", query)
   projects = [project.to_dict() for project in query]
   return { "projects": projects }
 
@@ -122,10 +121,16 @@ def get_sections(project_id):
   sections = [section.to_dict() for section in query]
   return { "sections": sections }
 
+@project_routes.route('/sections/user/<user_id>')
+def get_all_sections(user_id):
+  query = Section.query.filter_by(user_id=user_id).all()
+  print("SECTION QUERY:: ", query);
+  sections = [section.to_dict() for section in query]
+  return { "allSections": sections }
+
 @project_routes.route('/sections/new', methods=['POST'])
 def post_section():
   data = request.json
-  print("DATA:: ", data)
   if data:
     section = Section(
       user_id=data['user_id'],
@@ -181,3 +186,11 @@ def post_label():
     db.session.add(label)
     db.session.commit()
     return label.to_dict()
+
+@project_routes.route('/labels/task/new', methods=['POST'])
+def post_labeled_task():
+  data = request.json
+  if data:
+    task = Task(
+
+    )

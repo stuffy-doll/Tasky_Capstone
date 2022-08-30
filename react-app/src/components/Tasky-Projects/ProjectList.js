@@ -14,6 +14,7 @@ import { getComments } from '../../store/comments';
 import { getLabels } from '../../store/labels';
 import Labels from './Labels';
 import LabelsSplash from './LabelsSplash';
+import LabelView from "./LabelView";
 
 const ProjectList = () => {
   const dispatch = useDispatch();
@@ -143,6 +144,9 @@ const ProjectList = () => {
             </ProtectedRoute>
             <ProtectedRoute path='/projects/:projectId/task/:taskId' exact={true}>
               <TaskView />
+            </ProtectedRoute>
+            <ProtectedRoute path='/projects/labels/:labelId' exact={true} >
+              <LabelView projects={projects} labels={labels} />
             </ProtectedRoute>
           </Switch>
         </main>

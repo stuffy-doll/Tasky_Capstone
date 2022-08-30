@@ -1,0 +1,30 @@
+.add-false {
+  border: none;
+  height: 20px;
+  width: auto;
+  background-color: #00CAA9;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.add-false:hover {
+  cursor: pointer;
+  background-color: #17e9c6;
+}
+
+.add-true {
+  border: none;
+  height: 20px;
+  width: auto;
+  background-color: #1f1f1f;
+  color: #757575;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.add-true:hover {
+  cursor: not-allowed;
+}
+
+/* .lv-taskform-ddp>textarea {} */

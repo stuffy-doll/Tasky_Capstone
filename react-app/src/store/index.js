@@ -6,6 +6,7 @@ import sectionReducer from './sections';
 import taskReducer from './tasks';
 import commentsReducer from './comments';
 import labelReducer from './labels';
+import allReducer from './all';
 
 const rootReducer = combineReducers({
   session,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   sections: sectionReducer,
   tasks: taskReducer,
   comments: commentsReducer,
-  labels: labelReducer
+  labels: labelReducer,
+  all: allReducer,
 });
 
 
