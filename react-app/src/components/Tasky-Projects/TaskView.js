@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { getSections } from "../../store/sections";
+import { getTasklabels } from "../../store/labels";
 import { deleteTask, getTasks, updateTask } from "../../store/tasks";
 import './css/task-view.css'
 import NotFound from "./NotFound";
@@ -24,6 +25,8 @@ const TaskView = () => {
 
   const project = useSelector(state => Object.values(state.projects)
     .find(project => project.id === task?.project_id));
+
+  const labels = useSelector(state => Object.values(state.labels));
 
   const dateFormatter = (date) => {
     if (date) {
@@ -52,6 +55,8 @@ const TaskView = () => {
   useEffect(() => {
     dispatch(getTasks(projectId));
     dispatch(getSections(projectId));
+    dispatch(getTasklabels(taskId));
+
   }, [dispatch, projectId]);
 
   const handleEdit = (task) => {
@@ -174,6 +179,16 @@ const TaskView = () => {
         )}
         {showTextForm && (
           <textarea className="description-edit" name="description" placeholder="Write a description here..." value={description} onChange={(e) => setDescription(e.target.value)} />
+        )}
+        {!showTextForm && (
+          <div className="labels-container">
+            {labels.map((label, idx) => (
+              <div className='label-tab' key={idx}>
+                {console.log(label.label)}
+                <Link className={label.label.toLowerCase() === 'iridescent' ? 'label-link-iridescent' : `label-link-${label.color_label.split(' ')[0].toLowerCase()}`} to={`/projects/labels/${label.id}`}><i className="fa fa-tags" /> {label.label}</Link>
+              </div>
+            ))}
+          </div>
         )}
         {!showTextForm && (
           <>

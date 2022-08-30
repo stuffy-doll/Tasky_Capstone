@@ -62,6 +62,67 @@
   margin-left: 20px;
 }
 
+.label-link-iridescent {
+  -webkit-background-clip: text;
+  text-decoration: none;
+  background-clip: text;
+  /* color: transparent; */
+  animation: colorRotate 6s ease-in-out infinite;
+  background-size: 400% 100%;
+}
+
+@keyframes colorRotate {
+  from {
+    color: #6666ff;
+  }
+
+  10% {
+    color: #ffa1c5;
+  }
+
+  50% {
+    color: #fdf4a5;
+  }
+
+  75% {
+    color: #d481f5;
+  }
+
+  100% {
+    color: #6666ff;
+  }
+}
+
+.label-link-mellow {
+  margin-left: 4px;
+  text-decoration: none;
+  color: #FFB86F;
+  transition: .4s ease-in
+}
+
+.label-link-mellow:hover {
+  border-bottom: 1px solid #FFB86F;
+}
+
+#label-mellow {
+  color: #FFB86F;
+}
+
+.label-link-sea {
+  margin-left: 4px;
+  text-decoration: none;
+  color: #2E8B57;
+  transition: .4s ease-in
+}
+
+.label-link-sea:hover {
+  border-bottom: 1px solid #2E8B57;
+}
+
+#label-sea {
+  color: #2E8B57;
+}
+
 #trash {
   text-align: center;
 }
