@@ -117,5 +117,5 @@ class Label(db.Model):
     return {
       "id": self.id,
       "label": self.label,
-      "color_label": self.color_label
+      "color_label": self.color_label,
     }
