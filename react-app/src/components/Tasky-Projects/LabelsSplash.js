@@ -5,6 +5,69 @@ import { postLabel } from "../../store/labels";
 import './css/labels-splash.css'
 import ProtectedRoute from "../auth/ProtectedRoute";
 
+export const colorsv2 = [
+  {
+    color: 'Brick Break',
+    code: '#88292F'
+  },
+  {
+    color: 'Cherry Plum',
+    code: '#F85329'
+  },
+  {
+    color: 'Baby Peach',
+    code: '#FCB2A9'
+  },
+  {
+    color: 'Reserved Orange',
+    code: '#D36135'
+  },
+  {
+    color: 'Deep Beige',
+    code: '#E5B181'
+  },
+  {
+    color: 'Mellow Apricot',
+    code: '#FFB86F'
+  },
+  {
+    color: 'Pastel Yellow',
+    code: '#FDFD96'
+  },
+  {
+    color: 'Crawling Green',
+    code: '#CADF9E'
+  },
+  {
+    color: 'Sea Grass',
+    code: '#2E8B57'
+  },
+  {
+    color: 'Mint Blue',
+    code: '#65FFEC'
+  },
+  {
+    color: 'Bright Purple',
+    code: '#CE9EFF'
+  },
+  {
+    color: 'Perfect Sky',
+    code: '#D7B9D5'
+  },
+  {
+    color: 'Dry Bones',
+    code: '#D0E1D4'
+  },
+  {
+    color: 'Ghost Light',
+    code: '#E4DEE4'
+  },
+  {
+    color: 'Black Coral',
+    code: '#5E697F'
+  },
+]
+
 const LabelsSplash = ({ userId, projects, labels }) => {
   const dispatch = useDispatch();
 
@@ -41,69 +104,6 @@ const LabelsSplash = ({ userId, projects, labels }) => {
       };
     };
   };
-
-  const colorsv2 = [
-    {
-      color: 'Brick Break',
-      code: '#88292F'
-    },
-    {
-      color: 'Cherry Plum',
-      code: '#F85329'
-    },
-    {
-      color: 'Baby Peach',
-      code: '#FCB2A9'
-    },
-    {
-      color: 'Reserved Orange',
-      code: '#D36135'
-    },
-    {
-      color: 'Deep Beige',
-      code: '#E5B181'
-    },
-    {
-      color: 'Mellow Apricot',
-      code: '#FFB86F'
-    },
-    {
-      color: 'Pastel Yellow',
-      code: '#FDFD96'
-    },
-    {
-      color: 'Crawling Green',
-      code: '#CADF9E'
-    },
-    {
-      color: 'Sea Grass',
-      code: '#2E8B57'
-    },
-    {
-      color: 'Mint Blue',
-      code: '#65FFEC'
-    },
-    {
-      color: 'Bright Purple',
-      code: '#CE9EFF'
-    },
-    {
-      color: 'Perfect Sky',
-      code: '#D7B9D5'
-    },
-    {
-      color: 'Dry Bones',
-      code: '#D0E1D4'
-    },
-    {
-      color: 'Ghost Light',
-      code: '#E4DEE4'
-    },
-    {
-      color: 'Black Coral',
-      code: '#5E697F'
-    },
-  ]
 
   return (
     <div className="labels-splash-view">

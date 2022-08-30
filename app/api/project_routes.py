@@ -217,3 +217,12 @@ def get_label_tasks(label_id):
   return {
     "tasks": tasks
   }
+
+@project_routes.route('/labels/<label_id>/update', methods=['PUT'])
+def update_label(label_id):
+  data = request.json
+  label = Label.query.get(label_id)
+  label.label = data['label']
+  label.color_label = data['color_label']
+  db.session.commit()
+  return label.to_dict()

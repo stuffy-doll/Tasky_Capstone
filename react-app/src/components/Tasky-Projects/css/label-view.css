@@ -27,4 +27,24 @@
   cursor: not-allowed;
 }
 
+.save-false {
+  border: none;
+  height: 20px;
+  width: auto;
+  background-color: #E69600;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.save-true {
+  border: none;
+  height: 20px;
+  width: auto;
+  background-color: #1f1f1f;
+  color: #757575;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
 /* .lv-taskform-ddp>textarea {} */
