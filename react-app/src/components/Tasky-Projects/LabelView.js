@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getAllSections } from "../../store/all";
-import { getSections } from "../../store/sections";
+import { postTask } from "../../store/tasks";
+import './css/label-view.css'
 
 const LabelView = ({ projects, labels }) => {
   const dispatch = useDispatch();
@@ -10,9 +11,7 @@ const LabelView = ({ projects, labels }) => {
   const label = labels.find(label => label.id === labelId);
 
   const userId = useSelector(state => state.session.user.id);
-  console.log(userId);
   const sections = useSelector(state => Object.values(state.all))
-  console.log(sections);
 
   const today = new Date(Date.now());
 
@@ -32,13 +31,30 @@ const LabelView = ({ projects, labels }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState(dateFormatter(today));
+  // TODO: Fix this state
   const [values, setValues] = useState([]);
+  console.log(values);
 
-  console.log("VALUES:: ", values);
-
-  const handleSubmit = (e) => {
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const payload = {
+      user_id: userId,
+      project_id: +values[0],
+      section_id: +values[2],
+      title,
+      description,
+      due_date: dueDate === undefined ? null : dueDate
+    };
+    console.log("PAYLOAD:: ", payload);
+    const res = await dispatch(postTask(payload))
+    if (res) {
+      setTitle('');
+      setDescription('');
+      setDueDate(dateFormatter(today));
+      setValues([]);
+      setShowTaskForm(false);
+    };
+  };
 
   return (
     <>
@@ -91,7 +107,7 @@ const LabelView = ({ projects, labels }) => {
               </select>
             </div>
             <div className="lv-taskform-actions">
-              <button className="add" type="submit">Add Task</button>
+              <button className={`add-${!title.length || title.length > 50}`} disabled={!title.length || title.length > 50} type="submit">Add Task</button>
               <button onClick={() => setShowTaskForm(false)} className="cancel">Cancel</button>
             </div>
           </form>
