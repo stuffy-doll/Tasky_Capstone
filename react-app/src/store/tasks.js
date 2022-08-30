@@ -1,5 +1,6 @@
 const GET_TASKS = 'get/getTasks';
 const GET_USER_TASKS = 'get/getUserTasks';
+const GET_LABEL_TASKS = 'get/getLabelTasks';
 const POST_TASK = 'post/postTask';
 const UPDATE_TASK = 'update/updateTask';
 const DELETE_TASK = 'delete/deleteTask';
@@ -14,10 +15,15 @@ const getUT = (payload) => ({
   payload
 });
 
+const getLT = (payload) => ({
+  type: GET_LABEL_TASKS,
+  payload
+});
+
 const postT = (payload) => ({
   type: POST_TASK,
   payload
-})
+});
 
 const putT = (payload) => ({
   type: UPDATE_TASK,
@@ -35,6 +41,19 @@ export const getTasks = (projectId) => async dispatch => {
     const data = await res.json();
     dispatch(getT(data));
     return res;
+  } else {
+    return {
+      "Message": "Unsuccessful"
+    };
+  };
+};
+
+export const getLabelTasks = (labelId) => async dispatch => {
+  const res = await fetch(`/api/projects/labels/tasks/${labelId}`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getLT(data));
+    return data;
   } else {
     return {
       "Message": "Unsuccessful"
@@ -117,6 +136,10 @@ const taskReducer = (state = {}, action) => {
       newState = {}
       action.payload.uTasks.forEach(task => newState[task.id] = task)
       return newState
+    case GET_LABEL_TASKS:
+      newState = {}
+      action.payload.tasks.forEach(task => newState[task.id] = task)
+      return newState;
     case POST_TASK:
       newState[action.payload.id] = action.payload;
       return newState

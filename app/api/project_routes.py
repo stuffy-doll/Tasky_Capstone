@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Blueprint, request
 from flask_login import login_required
 from app.models import (db, User, Project, Section, Task, Comment, Label)
@@ -58,6 +59,14 @@ def get_tasks_by_user(user_id):
   query = Task.query.filter_by(user_id=user_id).all()
   tasks = [task.to_dict() for task in query]
   return { "uTasks": tasks }
+
+@project_routes.route('/tasks/labels/<task_id>')
+def get_task_labels(task_id):
+  task = Task.query.get(task_id)
+  labels = [label.to_dict() for label in task.task_labels]
+  return {
+    "labels": labels
+  };
 
 @project_routes.route('/tasks/new', methods=['POST'])
 def post_task():
@@ -187,10 +196,24 @@ def post_label():
     db.session.commit()
     return label.to_dict()
 
-@project_routes.route('/labels/task/new', methods=['POST'])
-def post_labeled_task():
+@project_routes.route('/labels/relate', methods=['PUT'])
+def label_task():
   data = request.json
-  if data:
-    task = Task(
+  print(data)
+  task = Task.query.get(data['task_id'])
+  label = Label.query.get(data['label_id'])
+  task.task_labels.append(label)
+  label.label_tasks.append(task)
+  db.session.commit()
+  return {
+    'task_id': task.id,
+    'label_id': label.id
+  }
 
-    )
+@project_routes.route('/labels/tasks/<label_id>')
+def get_label_tasks(label_id):
+  label = Label.query.get(label_id)
+  tasks = [task.to_dict() for task in label.label_tasks]
+  return {
+    "tasks": tasks
+  }

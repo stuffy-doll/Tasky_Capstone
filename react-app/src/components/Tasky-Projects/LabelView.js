@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getAllSections } from "../../store/all";
-import { postTask } from "../../store/tasks";
+import { getLabelTasks, postTask } from "../../store/tasks";
 import './css/label-view.css'
 
 const LabelView = ({ projects, labels }) => {
@@ -11,9 +11,25 @@ const LabelView = ({ projects, labels }) => {
   const label = labels.find(label => label.id === labelId);
 
   const userId = useSelector(state => state.session.user.id);
-  const sections = useSelector(state => Object.values(state.all))
+  const sections = useSelector(state => Object.values(state.all));
+  const tasks = useSelector(state => Object.values(state.tasks));
+  console.log(tasks);
 
   const today = new Date(Date.now());
+
+  const determineDue = (date) => {
+    date = new Date(date.slice(0, -4))
+    const today = new Date(Date.now());
+
+    if (today.getDate() > date.getDate()) {
+      return `${today.getDate() - date.getDate()} day(s) overdue.`
+    } else if (today.getDate() === date.getDate()) {
+      return `Due today.`
+    } else {
+      date = date.toString().split(' ');
+      return `Due ${date[0]}, ${date[1]} ${date[2]}`
+    }
+  }
 
   const dateFormatter = (date) => {
     const day = date.getDate();
@@ -24,7 +40,8 @@ const LabelView = ({ projects, labels }) => {
 
   useEffect(() => {
     dispatch(getAllSections(userId));
-  }, [dispatch, userId]);
+    dispatch(getLabelTasks(labelId));
+  }, [dispatch, userId, labelId]);
 
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [keystroke] = useState(50);
@@ -33,7 +50,6 @@ const LabelView = ({ projects, labels }) => {
   const [dueDate, setDueDate] = useState(dateFormatter(today));
   // TODO: Fix this state
   const [values, setValues] = useState([]);
-  console.log(values);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +63,19 @@ const LabelView = ({ projects, labels }) => {
     };
     console.log("PAYLOAD:: ", payload);
     const res = await dispatch(postTask(payload))
+
+    const relation = {
+      task_id: res.id,
+      label_id: labelId
+    };
+
+    console.log(label.label_tasks)
+
+    await fetch(`/api/projects/labels/relate`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(relation)
+    });
     if (res) {
       setTitle('');
       setDescription('');
@@ -113,6 +142,37 @@ const LabelView = ({ projects, labels }) => {
           </form>
         </div>
       )}
+      <div className="tasks-container">
+        {tasks.map((task, idx) => (
+          <div key={idx} className="task-card">
+            <div className="task-header">
+              <input type="checkbox" disabled={false} onChange={async (e) => {
+                e.preventDefault()
+                const payload = {
+                  task_id: task.id
+                }
+                const res = await fetch(`/api/projects/tasks/complete`, {
+                  method: 'PUT',
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload)
+                });
+                if (res) {
+                  await dispatch(getLabelTasks(labelId))
+                  return res.json();
+                } else {
+                  return { "Message": "Unsuccessful" }
+                }
+              }} />
+              <Link className="unfinished-task" to={`/projects/${task.project_id}/task/${task.id}`}>{task.title}</Link>
+            </div>
+            <div className="task-card-description">
+
+              <p>{task.description}</p>
+            </div>
+            <div className={determineDue(task.due_date).includes('overdue') ? 'overdue' : 'due'}>{determineDue(task.due_date)}</div>
+          </div>
+        ))}
+      </div>
     </>
   )
 }
