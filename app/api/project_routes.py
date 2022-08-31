@@ -117,7 +117,10 @@ def update_task(task_id):
 @project_routes.route('/tasks/<task_id>/delete', methods=['DELETE'])
 def delete_task(task_id):
   task = Task.query.get(task_id)
-  print(task)
+  if len(task.task_labels) > 0:
+    for label in task.task_labels:
+      task.task_labels.remove(label)
+    db.session.commit()
   db.session.delete(task)
   db.session.commit()
   return task.to_dict()

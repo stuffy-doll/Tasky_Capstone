@@ -120,6 +120,7 @@ const LabelView = ({ projects, labels }) => {
       <div className="label-view-heading">
         {!showEditForm && (
           <div>
+            <h3 id={label.label.toLowerCase() === 'iridescent' ? 'label-iridescent' : `label-${label.color_label.split(' ')[0].toLowerCase()}`} className="fa fa-tags" />
             <h3>{label.label}</h3>
           </div>
         )}
@@ -133,7 +134,7 @@ const LabelView = ({ projects, labels }) => {
                 onChange={(e) => setLabelName(e.target.value)}
               />
               <p className={!labelName.length || labelName.length > lkeystroke ? 'danger' : 'primary'}>{labelName.length}/{lkeystroke}</p>
-              <select name='color label'>
+              <select name='color label' onChange={(e) => setColorLabel(e.target.value)}>
                 {colorsv2.map((color, idx) => (
                   <option key={idx} style={{ color: color.code }} value={color.color}>{color.color}</option>
                 ))}
