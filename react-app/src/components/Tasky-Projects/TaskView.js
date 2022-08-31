@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { getSections } from "../../store/sections";
-import { getTasklabels } from "../../store/labels";
+import { getLabels, getTasklabels } from "../../store/labels";
 import { deleteTask, getTasks, updateTask } from "../../store/tasks";
 import './css/task-view.css'
 import NotFound from "./NotFound";
 
-const TaskView = () => {
+const TaskView = ({ allLabels }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -51,13 +51,16 @@ const TaskView = () => {
   const [dueDate, setDueDate] = useState(dateFormatter(""));
   const [valErrors, setValErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+  // Label Form
+  const [showLabelForm, setShowLabelForm] = useState(false);
+  const [labelId, setLabelId] = useState(0);
+  const [labelName, setLabelName] = useState('');
 
   useEffect(() => {
     dispatch(getTasks(projectId));
     dispatch(getSections(projectId));
     dispatch(getTasklabels(taskId));
-
-  }, [dispatch, projectId]);
+  }, [dispatch, projectId, taskId, userId]);
 
   const handleEdit = (task) => {
     setTitle(task.title);
@@ -95,6 +98,10 @@ const TaskView = () => {
       };
     };
   };
+
+  const handleLabel = (e) => {
+    return;
+  }
 
   const determineDue = (date) => {
     date = new Date(date.slice(0, -4))
@@ -188,6 +195,19 @@ const TaskView = () => {
                 <Link className={label.label.toLowerCase() === 'iridescent' ? 'label-link-iridescent' : `label-link-${label.color_label.split(' ')[0].toLowerCase()}`} to={`/projects/labels/${label.id}`}><i className="fa fa-tags" /> {label.label}</Link>
               </div>
             ))}
+            {!showLabelForm && (
+              <span className='fa-stack fa-2x' onClick={() => setShowLabelForm(true)}>
+                <i id='label-plus' className="fa fa-tags fa-stack-1x" />
+                <i id='plus-label' className="fa fa-plus fa-stack-2x" />
+              </span>
+            )}
+            {showLabelForm && (
+              <form onSubmit={handleLabel}>
+                <select name="label" onChange={(e) => setLabelId(e.target.value)}>
+
+                </select>
+              </form>
+            )}
           </div>
         )}
         {!showTextForm && (

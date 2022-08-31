@@ -1,6 +1,7 @@
 const GET_LABELS = 'get/getLabels';
 const GET_TASK_LABELS = 'get/getTaskLabels';
 const POST_LABEL = 'post/postLabel';
+const PUT_LABEL = 'put/updateLabel';
 
 const getL = (payload) => ({
   type: GET_LABELS,
@@ -14,6 +15,11 @@ const getTL = (payload) => ({
 
 const postL = (payload) => ({
   type: POST_LABEL,
+  payload
+});
+
+const putL = (payload) => ({
+  type: PUT_LABEL,
   payload
 });
 
@@ -55,8 +61,24 @@ export const postLabel = (payload) => async dispatch => {
     return data;
   } else {
     return unsuccessful;
-  }
-}
+  };
+};
+
+export const updateLabel = (payload) => async dispatch => {
+  const labelId = payload.id;
+  const res = await fetch(`/api/projects/labels/${labelId}/update`, {
+    method: 'PUT',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(putL(data));
+    return data;
+  } else {
+    return unsuccessful;
+  };
+};
 
 const labelReducer = (state = {}, action) => {
   let newState = { ...state };
@@ -69,6 +91,9 @@ const labelReducer = (state = {}, action) => {
       action.payload.labels.forEach(label => newState[label.id] = label)
       return newState;
     case POST_LABEL:
+      newState[action.payload.id] = action.payload
+      return newState;
+    case PUT_LABEL:
       newState[action.payload.id] = action.payload
       return newState;
     default:

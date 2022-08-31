@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { getAllSections } from "../../store/all";
+import { updateLabel } from "../../store/labels";
 import { getLabelTasks, postTask } from "../../store/tasks";
 import './css/label-view.css'
+import { colorsv2 } from "./LabelsSplash";
 
 const LabelView = ({ projects, labels }) => {
   const dispatch = useDispatch();
@@ -43,6 +45,13 @@ const LabelView = ({ projects, labels }) => {
     dispatch(getLabelTasks(labelId));
   }, [dispatch, userId, labelId]);
 
+  // Label Edit
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [labelName, setLabelName] = useState(label.label);
+  const [lkeystroke] = useState(20);
+  const [colorLabel, setColorLabel] = useState(label.color_label);
+
+  // Task Form
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [keystroke] = useState(50);
   const [title, setTitle] = useState('');
@@ -85,17 +94,64 @@ const LabelView = ({ projects, labels }) => {
     };
   };
 
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    const payload = {
+      id: labelId,
+      label: labelName,
+      color_label: colorLabel
+    }
+    const res = await dispatch(updateLabel(payload));
+    if (res) {
+      setShowEditForm(false);
+      setLabelName(res.label);
+      setColorLabel(res.color_label);
+    };
+  };
+
+  const handleEditCancel = () => {
+    setShowEditForm(false);
+    setLabelName(label.label);
+    setColorLabel(label.color_label);
+  }
+
   return (
     <>
       <div className="label-view-heading">
-        <div>
-          <h3>{label.label}</h3>
-        </div>
-        <div className="label-view-actions">
-          {!showTaskForm && (
+        {!showEditForm && (
+          <div>
+            <h3 id={label.label.toLowerCase() === 'iridescent' ? 'label-iridescent' : `label-${label.color_label.split(' ')[0].toLowerCase()}`} className="fa fa-tags" />
+            <h3>{label.label}</h3>
+          </div>
+        )}
+        {showEditForm && (
+          <form onSubmit={handleEdit}>
+            <div className="lv-edit-inputs">
+              <input
+                type="text"
+                placeholder="Label Name"
+                value={labelName}
+                onChange={(e) => setLabelName(e.target.value)}
+              />
+              <p className={!labelName.length || labelName.length > lkeystroke ? 'danger' : 'primary'}>{labelName.length}/{lkeystroke}</p>
+              <select name='color label' onChange={(e) => setColorLabel(e.target.value)}>
+                {colorsv2.map((color, idx) => (
+                  <option key={idx} style={{ color: color.code }} value={color.color}>{color.color}</option>
+                ))}
+              </select>
+            </div>
+            <div className="lv-edit-actions">
+              <button className="cancel" onClick={handleEditCancel}>Cancel</button>
+              <button className={`save-${!labelName.length || labelName.length > lkeystroke}`} disabled={!labelName.length || labelName.length > lkeystroke} type="submit">Save</button>
+            </div>
+          </form>
+        )}
+        {!showTaskForm && !showEditForm && (
+          <div className="label-actions">
+            <button id="pencil" className="fa fa-pencil-square" onClick={() => setShowEditForm(true)} />
             <button onClick={() => setShowTaskForm(true)}>+ Add Task</button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       {showTaskForm && (
         <div className="lv-taskform-container">
