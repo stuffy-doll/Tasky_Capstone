@@ -1,4 +1,4 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import date, timedelta
 
 tasks_labels = db.Table('tasks_labels',
@@ -8,9 +8,11 @@ tasks_labels = db.Table('tasks_labels',
 
 class Project(db.Model):
   __tablename__ = 'projects'
+  if environment == "production":
+    __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
   name = db.Column(db.String(50), nullable=False)
   color_label = db.Column(db.String, nullable=False)
   is_favorite = db.Column(db.Boolean, default=False)
@@ -34,10 +36,12 @@ class Project(db.Model):
 
 class Section(db.Model):
   __tablename__ = 'sections'
+  if environment == "production":
+    __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-  project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
   name = db.Column(db.String(50), nullable=False)
 
   user = db.relationship('User', back_populates='sections')
@@ -55,11 +59,13 @@ class Section(db.Model):
 
 class Task(db.Model):
   __tablename__ = 'tasks'
+  if environment == "production":
+    __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-  project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
-  section_id = db.Column(db.Integer, db.ForeignKey('sections.id'), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
+  section_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('sections.id')), nullable=False)
   title = db.Column(db.String(50), nullable=False)
   description = db.Column(db.Text)
   due_date = db.Column(db.Date, default=(date.today() + timedelta(days=7)))
@@ -85,10 +91,12 @@ class Task(db.Model):
 
 class Comment(db.Model):
   __tablename__ = 'comments'
+  if environment == "production":
+    __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-  project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
   content = db.Column(db.Text)
 
   user = db.relationship('User', back_populates='comments')
@@ -104,9 +112,11 @@ class Comment(db.Model):
 
 class Label(db.Model):
   __tablename__ = 'labels'
+  if environment == "production":
+    __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
   label = db.Column(db.String(20), nullable=False)
   color_label = db.Column(db.String, nullable=False)
 
