@@ -78,6 +78,70 @@
   }
 }
 
+#color-tag-default {
+  color: #B4B4B4
+}
+
+#color-tag-brick {
+  color: #88292F;
+}
+
+#color-tag-baby {
+  color: #FCB2A9;
+}
+
+#color-tag-sea {
+  color: #2E8B57;
+}
+
+#color-tag-cherry {
+  color: #F85329;
+}
+
+#color-tag-pastel {
+  color: #FDFD96;
+}
+
+#color-tag-mint {
+  color: #65FFEC;
+}
+
+#color-tag-bright {
+  color: #CE9EFF;
+}
+
+#color-tag-reserved {
+  color: #D36135;
+}
+
+#color-tag-perfect {
+  color: #D7B9D5;
+}
+
+#color-tag-crawling {
+  color: #CADF9E;
+}
+
+#color-tag-dry {
+  color: #D0E1D4;
+}
+
+#color-tag-ghost {
+  color: #E4DEE4;
+}
+
+#color-tag-deep {
+  color: #E5B181;
+}
+
+#color-tag-black {
+  color: #5E697F;
+}
+
+#color-tag-mellow {
+  color: #FFB86F;
+}
+
 #label-default {
   color: #B4B4B4
 }
@@ -139,6 +203,102 @@
 }
 
 #label-mellow {
+  color: #FFB86F;
+}
+
+#link-label-default {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #B4B4B4
+}
+
+#link-label-brick {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #88292F;
+}
+
+#link-label-baby {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #FCB2A9;
+}
+
+#link-label-sea {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #2E8B57;
+}
+
+#link-label-cherry {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #F85329;
+}
+
+#link-label-pastel {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #FDFD96;
+}
+
+#link-label-mint {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #65FFEC;
+}
+
+#link-label-bright {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #CE9EFF;
+}
+
+#link-label-reserved {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #D36135;
+}
+
+#link-label-perfect {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #D7B9D5;
+}
+
+#link-label-crawling {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #CADF9E;
+}
+
+#link-label-dry {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #D0E1D4;
+}
+
+#link-label-ghost {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #E4DEE4;
+}
+
+#link-label-deep {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #E5B181;
+}
+
+#link-label-black {
+  margin-left: 5px;
+  text-decoration: none;
+  color: #5E697F;
+}
+
+#link-label-mellow {
+  margin-left: 5px;
+  text-decoration: none;
   color: #FFB86F;
 }
 

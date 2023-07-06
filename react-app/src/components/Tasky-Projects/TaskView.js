@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { getSections } from "../../store/sections";
-import { getLabels, getTasklabels } from "../../store/labels";
+import { getTasklabels } from "../../store/labels";
 import { deleteTask, getTasks, updateTask } from "../../store/tasks";
 import './css/task-view.css'
 import NotFound from "./NotFound";
 
-const TaskView = ({ allLabels }) => {
+const TaskView = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -232,6 +232,5 @@ const TaskView = ({ allLabels }) => {
     )
   }
 }
-
 
 export default TaskView;

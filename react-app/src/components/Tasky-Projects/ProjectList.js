@@ -143,7 +143,7 @@ const ProjectList = () => {
               <ProjectView userId={userId} projects={projects} comments={comments} />
             </ProtectedRoute>
             <ProtectedRoute path='/projects/:projectId/task/:taskId' exact={true}>
-              <TaskView allLabels={labels} />
+              <TaskView />
             </ProtectedRoute>
             <ProtectedRoute path='/projects/labels/:labelId' exact={true} >
               <LabelView projects={projects} labels={labels} />

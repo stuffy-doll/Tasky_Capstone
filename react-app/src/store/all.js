@@ -1,10 +1,10 @@
-const GET_ALL_TASKS = 'getALL/getAllTasks';
+// const GET_ALL_TASKS = 'getALL/getAllTasks';
 const GET_ALL_SECTIONS = 'getALL/getAllSections';
 
-const allTasks = (payload) => ({
-  type: GET_ALL_TASKS,
-  payload
-});
+// const allTasks = (payload) => ({
+//   type: GET_ALL_TASKS,
+//   payload
+// });
 
 const allSections = (payload) => ({
   type: GET_ALL_SECTIONS,
