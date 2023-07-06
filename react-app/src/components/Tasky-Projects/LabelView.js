@@ -78,8 +78,6 @@ const LabelView = ({ projects, labels }) => {
       label_id: labelId
     };
 
-    console.log(label.label_tasks)
-
     await fetch(`/api/projects/labels/relate`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -179,7 +177,7 @@ const LabelView = ({ projects, labels }) => {
               />
               <select name='project' onChange={(e) => setValues(e.target.value)}>
                 {projects.map((project, idx) => (
-                  <optgroup key={idx} label={project.name}>
+                  <optgroup style={{ color: "white" }} key={idx} label={project.name}>
                     {sections.map(section => (
                       <>
                         {section.project_id === project.id && (

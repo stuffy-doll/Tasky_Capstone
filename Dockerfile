@@ -3,9 +3,11 @@ FROM python:3.9
 # Set the following enviroment variables
 #
 ENV REACT_APP_BASE_URL=https://tasky-capstone.herokuapp.com
+ENV DATABASE_URL=postgres://magik_database_user:TRI0RAZyf8SgGvyYb40t8DwUdScexYZH@dpg-ch87sjg2qv2864rhb9f0-a/magik_database
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
 ENV SQLALCHEMY_ECHO=True
+ENV SCHEMA=capstone_tasky
 # REACT_APP_BASE_URL -> Your deployment URL
 # FLASK_APP -> entry point to your flask app
 # FLASK_ENV -> Tell flask to use the production server
@@ -17,12 +19,11 @@ WORKDIR /var/www
 COPY . .
 # Copy the built react app (it's built for us) from the
 # /react-app/build/ directory into your flasks app/static directory
-COPY /react-app/build/* app/static/
-# Run the next two python install commands with PIP
-# install -r requirements.txt
-# install psycopg2
-RUN pip install -r requirements.txt
-RUN pip install psycopg2
+RUN apt-get update && apt-get upgrade -y && \
+  apt-get install -y nodejs \
+  npm
+
+RUN npm install --prefix react-app && npm run build --prefix react-app && pip install -r requirements.txt && pip install psycopg2-binary && flask db upgrade && flask seed all
 # Start the flask environment by setting our
 # closing command to gunicorn app:app
 CMD gunicorn app:app

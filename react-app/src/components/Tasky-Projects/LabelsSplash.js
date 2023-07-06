@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { postLabel } from "../../store/labels";
+import { getLabels, postLabel } from "../../store/labels";
 import './css/labels-splash.css'
-import ProtectedRoute from "../auth/ProtectedRoute";
 
 export const colorsv2 = [
   {
@@ -80,6 +79,10 @@ const LabelsSplash = ({ userId, projects, labels }) => {
   const [valErrors, setValErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
+  useEffect(() => {
+    dispatch(getLabels(userId));
+  }, [dispatch, userId])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
@@ -136,8 +139,8 @@ const LabelsSplash = ({ userId, projects, labels }) => {
         {labels.map((label, idx) => (
           <div key={idx} className="label-container">
             <div className="label-details">
-              <div id={`color-label-${label.color_label.split(' ')[0].toLowerCase()}`} />
-              <Link className="label-link" to={`/projects/labels/${label.id}`}>{label.label}</Link>
+              <div id={`color-tag-${label.color_label.split(' ')[0].toLowerCase()}`} className='fa fa-tags' />
+              <Link id={`link-label-${label.color_label.split(' ')[0].toLowerCase()}`} to={`/projects/labels/${label.id}`}>{label.label}</Link>
             </div>
             <div className="label-actions">
               {/* <button className="add-label-task">+</button> */}
