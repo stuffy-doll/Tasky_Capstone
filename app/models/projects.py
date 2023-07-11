@@ -12,7 +12,7 @@ class Project(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('tasky_users.id')), nullable=False)
   name = db.Column(db.String(50), nullable=False)
   color_label = db.Column(db.String, nullable=False)
   is_favorite = db.Column(db.Boolean, default=False)
@@ -40,7 +40,7 @@ class Section(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('tasky_users.id')), nullable=False)
   project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
   name = db.Column(db.String(50), nullable=False)
 
@@ -63,7 +63,7 @@ class Task(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('tasky_users.id')), nullable=False)
   project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
   section_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('sections.id')), nullable=False)
   title = db.Column(db.String(50), nullable=False)
@@ -95,7 +95,7 @@ class Comment(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('tasky_users.id')), nullable=False)
   project_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('projects.id')), nullable=False)
   content = db.Column(db.Text)
 
@@ -116,7 +116,7 @@ class Label(db.Model):
     __table_args__ = {'schema': SCHEMA}
 
   id = db.Column(db.Integer, primary_key=True)
-  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('tasky_users.id')), nullable=False)
   label = db.Column(db.String(20), nullable=False)
   color_label = db.Column(db.String, nullable=False)
 

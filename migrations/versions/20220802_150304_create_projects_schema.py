@@ -55,8 +55,8 @@ def upgrade():
     # ### end Alembic commands ###
 
     if environment == "production":
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE projects SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE sections SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE tasks SET SCHEMA {SCHEMA};")
 
